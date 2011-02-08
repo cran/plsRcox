@@ -1,189 +1,160 @@
-\name{plsRcox-package}
-\alias{plsRcox-package}
-\alias{plsRcox}
+\name{plsRglm-package}
+\alias{plsRglm-package}
 \docType{package}
 \title{
-Partial least squares Regression for Cox models and related techniques
+Partial least squares Regression for generalized linear models
 }
 \description{
-This packages provides Partial least squares Regression and various techniques for fitting Cox models in high dimensionnal settings. It allows for Kfold crossvalidation of such models using various criteria, missing data in the eXplanatory variables. Bootstrap confidence intervals constructions are also available.
+This packages provides Partial least squares Regression for generalized linear models and kfold crossvalidation of such models using various criteria. It allows for missing data in the eXplanatory variables. Bootstrap confidence intervals constructions are also available.
 }
 \details{
 \tabular{ll}{
-Package: \tab plsRcox\cr
-Version: \tab 0.2.0\cr
-Date: \tab 2011-01-13\cr
+Package: \tab plsRglm\cr
+Version: \tab 0.6.3\cr
+Date: \tab 2011-01-08\cr
 Depends: \tab R (>= 2.4.0)\cr
-Imports: \tab boot, plsRglm, lars, survival, pls\cr
-Enhances: \tab \cr
-Suggests: \tab glcoxph, survivalROC, plsRglm, lars, survival, pls\cr
+Imports: \tab mvtnorm, boot\cr
+Enhances: \tab pls\cr
+Suggests: \tab MASS\cr
 License: \tab GPL-3\cr
 Encoding: \tab latin1\cr
 URL: \tab http://www-irma.u-strasbg.fr/~fbertran/\cr
-Classification/MSC: \tab 62N01, 62N02, 62N03, 62N99\cr
-Built: \tab R 2.12.1; ; 2011-01-13 12:28:22 UTC; windows\cr
+Classification/MSC: \tab 62J12, 62J99\cr
+Packaged: \tab 2011-01-08 14:47:17 UTC; Bertrand\cr
+Built: \tab R 2.11.1; ; 2011-01-08 14:47:17 UTC; windows\cr
 }
 
 Index:
 \preformatted{
-DR_coxph                (Deviance) Residuals Computation
-Xmicro.censure_compl_imp
-                        Imputed Microsat features
-coxDKplsDR              Fitting a Direct Kernel PLS model on the
-                        (Deviance) Residuals
-cox_glcoxph_supp_vals_KM
-                        Demo dataset
-cox_glcoxph_supp_vals_KM_micro
-                        Demo dataset
-cox_glcoxph_supp_vals_NNE
-                        Demo dataset
-cox_glcoxph_supp_vals_NNE_micro
-                        Demo dataset
-cox_pls2_supp_vals_KM   Demo dataset
-cox_pls2_supp_vals_KM_micro
-                        Demo dataset
-cox_pls2_supp_vals_NNE
-                        Demo dataset
-cox_pls2_supp_vals_NNE_micro
-                        Demo dataset
-cox_plsDR2_supp_vals_KM
-                        Demo dataset
-cox_plsDR2_supp_vals_KM_micro
-                        Demo dataset
-cox_plsDR2_supp_vals_NNE
-                        Demo dataset
-cox_plsDR2_supp_vals_NNE_micro
-                        Demo dataset
-coxpls                  Fitting a Cox-Model on PLSR components
-coxpls2                 Fitting a Cox-Model on PLSR components
-coxplsDR                Fitting a PLSR model on the (Deviance)
-                        Residuals
-coxplsDR2               Fitting a PLSR model on the (Deviance)
-                        Residuals
-larsDR_coxph            Fitting a LASSO/LARS model on the (Deviance)
-                        Residuals
-lars_supp_vals_KM       Demo dataset
-lars_supp_vals_KM_micro
-                        Demo dataset
-lars_supp_vals_NNE      Demo dataset
-lars_supp_vals_NNE_micro
-                        Demo dataset
-micro.censure           Microsat features and survival times
+AICpls                  AIC functions for plsR models
+aze                     Microsat Dataset
+aze_compl               As aze without missing values
+bootpls                 Non-parametric Bootstrap for PLS models
+bootplsglm              Non-parametric Bootstrap for PLS generalized
+                        linear models
+bordeaux                Quality of wine dataset
+boxplots.bootpls        Boxplot bootstrap distributions
+coefs.plsR              Coefficients for bootstrap computations
+coefs.plsRglm           Coefficients for bootstrap computations
+confints.bootpls        Bootstrap confidence intervals
+CorMat                  Correlation matrix for simulating plsR datasets
+Cornell                 Cornell dataset
+dicho                   Dichotomization
+fowlkes                 Fowlkes dataset
+kfolds2Chisq            Computes Predicted Chisquare for kfold cross
+                        validated partial least squares regression
+                        models.
+kfolds2Chisqind         Computes individual Predicted Chisquare for
+                        kfold cross validated partial least squares
+                        regression models.
+kfolds2coeff            Extracts coefficients from kfold cross
+                        validated partial least squares regression
+                        models
+kfolds2CVinfos_glm      Extracts and computes information criteria and
+                        fits statistics for kfold cross validated
+                        partial least squares glm models
+kfolds2CVinfos_v2       Extracts and computes information criteria and
+                        fits statistics for kfold cross validated
+                        partial least squares glm models
+kfolds2Mclassed         Number of missclassified individuals for kfold
+                        cross validated partial least squares
+                        regression models.
+kfolds2Mclassedind      Number of missclassified individuals per group
+                        for kfold cross validated partial least squares
+                        regression models.
+kfolds2Press            Computes PRESS for kfold cross validated
+                        partial least squares regression models.
+kfolds2Pressind         Computes individual PRESS for kfold cross
+                        validated partial least squares regression
+                        models.
+loglikpls               loglikelihood functions for plsR models
+permcoefs.plsR          Coefficients computation for permutation
+                        bootstrap
+permcoefs.plsRglm       Coefficients computation for permutation
+                        bootstrap
+pine                    Pine dataset
+pine_full               Full pine dataset
+pine_sup                Supplementary data for pine dataset
+plots.confints.bootpls
+                        Plot bootstrap confidence intervals
+PLS_glm                 Partial least squares Regression generalized
+                        linear models
+PLS_glm_formula         Partial least squares Regression generalized
+                        linear models
+PLS_glm_kfoldcv         Partial least squares regression glm models
+                        with kfold cross validation
+PLS_glm_kfoldcv_formula
+                        Partial least squares regression glm models
+                        with kfold cross validation
+PLS_glm_wvc             Light version of PLS\_glm for cross validation
+                        purposes
+PLS_lm                  Partial least squares Regression models with
+                        leave one out cross validation
+PLS_lm_formula          Partial least squares Regression models with
+                        leave one out cross validation
+PLS_lm_kfoldcv          Partial least squares regression models with
+                        kfold cross validation
+PLS_lm_kfoldcv_formula
+                        Partial least squares regression models with
+                        kfold cross validation
+PLS_lm_wvc              Light version of PLS\_lm for cross validation
+                        purposes
+PLS_v1                  Partial least squares Regression models with
+                        leave one out cross validation
+PLS_v1_kfoldcv          Partial least squares regression models with
+                        kfold cross validation
+PLS_v1_wvc              Light version of PLS\_v1 for cross validation
+                        purposes
+PLS_v2                  Partial least squares Regression generalized
+                        linear models
+PLS_v2_kfoldcv          Partial least squares regression glm models
+                        with kfold cross validation
+PLS_v2_wvc              Light version of PLS\_v2 for cross validation
+                        purposes
+plsR                    Partial least squares Regression models with
+                        leave one out cross validation
+plsRglm                 Partial least squares Regression generalized
+                        linear models
+plsRglm-package         Partial least squares Regression for
+                        generalized linear models
+print.plsRglmmodel      Print method for plsRglm models
+print.plsRmodel         Print method for plsR models
+print.summary.plsRglmmodel
+                        Print method for summaries of plsRglm models
+print.summary.plsRmodel
+                        Print method for summaries of plsR models
+simul_data_complete     Data generating detailed process for
+                        multivariate plsR models
+simul_data_UniYX        Data generating function for univariate plsR
+                        models
+simul_data_YX           Data generating function for multivariate plsR
+                        models
+summary.plsRglmmodel    Summary method for plsRglm models
+summary.plsRmodel       Summary method for plsR models
+tilt.bootpls            Tilted bootstrap for PLS models
+tilt.bootplsglm         Tilted bootstrap for PLS models
+XbordeauxNA             Missing data analysis for the quality of wine
+                        dataset
+XpineNAX21              Missing data analysis for the pine dataset
 }
 }
 \author{
-Frederic Bertrand <frederic.bertrand@math.unistra.fr>, Myriam Maumy-Bertrand <myriam.maumy-bertrand@math.unistra.fr>, Nicolas Meyer <Nicolas.Meyer@nmeyer@unistra.fr>.
+Frederic Bertrand <frederic.bertrand@math.unistra.fr>, Nicolas Meyer <Nicolas.Meyer@nmeyer@unistra.fr>, Myriam Maumy-Bertrand <myriam.maumy-bertrand@math.unistra.fr>.
 
 Maintainer: Frederic Bertrand <frederic.bertrand@math.unistra.fr>
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.
+\references{\enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand et Nicolas Meyer (2011). \enc{Régression}{R\'egression} \enc{Bêta}{B\^eta} PLS. \emph{Preprint}.
 }
 \keyword{ package }
-\seealso{
-\code{\link[plsRglm:plsRglm-package]{plsRglm}}
-}
 \examples{
-\dontrun{
-data(micro.censure)
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
+\donttest{
+data(pine)
+ypine <- pine[,11]
+Xpine <- pine[,1:10]
+(Pinscaled <- as.data.frame(cbind(scale(log(ypine)),scale(as.matrix(Xpine)))))
+colnames(Pinscaled)[1] <- "yy"
 
-DR_coxph(Y_train_micro,C_train_micro,plot=TRUE)
-DR_coxph(Y_train_micro,C_train_micro,scaleY=FALSE,plot=TRUE)
-DR_coxph(Y_train_micro,C_train_micro,scaleY=TRUE,plot=TRUE)
-
-rm(Y_train_micro,C_train_micro)
-
-
-data(micro.censure)
-data(Xmicro.censure_compl_imp)
-
-X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
-
-(cox_larsDR_fit <- larsDR_coxph(X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE))
-(cox_larsDR_fit <- larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE))
-(cox_larsDR_fit <- larsDR_coxph(~.,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,dataXplan=data.frame(X_train_micro)))
-
-larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE)
-larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=FALSE)
-larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,allres=TRUE)
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_larsDR_fit)
-
-
-data(micro.censure)
-data(Xmicro.censure_compl_imp)
-
-X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
-
-(cox_pls_fit <- coxpls(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls_fit <- coxpls(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls_fit <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=data.frame(X_train_micro)))
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit)
-
-
-data(micro.censure)
-data(Xmicro.censure_compl_imp)
-
-X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
-
-(cox_pls2_fit=coxpls2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls2_fit=coxpls2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls2_fit=coxpls2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=data.frame(X_train_micro)))
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls2_fit)
-
-
-data(micro.censure)
-data(Xmicro.censure_compl_imp)
-
-X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
-
-(cox_plsDR_fit <- coxplsDR(X_train_micro,Y_train_micro,C_train_micro,nt=7))
-(cox_plsDR_fit <- coxplsDR(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
-(cox_plsDR_fit <- coxplsDR(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=data.frame(X_train_micro)))
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR_fit)
-
-
-data(micro.censure)
-data(Xmicro.censure_compl_imp)
-
-X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
-
-(cox_plsDR2_fit=coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR2_fit=coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR2_fit=coxplsDR2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="none",dataXplan=data.frame(X_train_micro)))
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit)
-
-
-data(micro.censure)
-data(Xmicro.censure_compl_imp)
-
-X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-Y_train_micro <- micro.censure$survyear[1:80]
-C_train_micro <- micro.censure$DC[1:80]
-
-(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=data.frame(X_train_micro)))
-
-(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-(cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-(cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=data.frame(X_train_micro)))
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKplsDR_fit)
+modpls <- plsR(log(ypine),Xpine,10)
+modpls$Std.Coeffs
 }
 }

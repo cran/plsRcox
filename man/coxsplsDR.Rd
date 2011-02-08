@@ -1,15 +1,15 @@
-\name{coxpls}
-\alias{coxpls}
-\alias{coxpls.default}
-\alias{coxpls.formula}
-\title{Fitting a Cox-Model on PLSR components}
+\name{coxsplsDR}
+\alias{coxsplsDR}
+\alias{coxsplsDR.default}
+\alias{coxsplsDR.formula}
+\title{Fitting a sPLSR model on the (Deviance) Residuals}
 \description{
-This function computes the the Cox-Model with PLSR components as the explanatory variables. It uses the package \code{pls}.
+This function computes the sPLSR model with the Residuals of a Cox-Model fitted with an intercept as the only explanatory variable as the response and Xplan as explanatory variables. Default behaviour uses the Deviance residuals. It uses the package \code{pls}.
 }
 \usage{
-coxpls(Xplan, \dots)
-\method{coxpls}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,...)
-\method{coxpls}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
+coxsplsDR(Xplan, \dots)
+\method{coxsplsDR}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot = FALSE, allres = FALSE, eta, trace=FALSE,...)
+\method{coxsplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,eta, trace=FALSE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -27,23 +27,25 @@ coxpls(Xplan, \dots)
   \item{validation}{character. What kind of (internal) validation to use. If \code{validation = "CV"}, cross-validation is performed. The number and type of cross-validation segments are specified with the arguments \code{segments} and \code{segment.type}. See \code{\link[pls]{mvrCv}} for details. If \code{validation = "LOO"}, leave-one-out cross-validation is performed. It is an error to specify the segments when \code{validation = "LOO"} is specified.}
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
-  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls} is called.}  
+  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxsplsDR} is called.}  
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
+  \item{eta}{Thresholding parameter. \code{eta} should be between 0 and 1.}
+  \item{trace}{Print out the progress of variable selection?}
   \item{\dots}{Arguments to be passed on to \code{survival::coxph}.}
 }
 \details{
 If \code{allres=FALSE} returns only the final Cox-model.
-If \code{allres=TRUE} returns a list with the PLS components, the final Cox-model and the PLSR model.
+If \code{allres=TRUE} returns a list with the sPLS components, the final Cox-model and the sPLSR model.
 \code{allres=TRUE} is useful for evluating model prediction accuracy on a test sample.
 }
 \value{If \code{allres=FALSE} : 
-\item{cox_pls}{Final Cox-model.}
+\item{cox_splsDR}{Final Cox-model.}
 If \code{allres=TRUE} :
-\item{tt_pls}{PLSR components.}
-\item{cox_pls}{Final Cox-model.}
-\item{pls_mod}{The PLSR model.}
+\item{tt_splsDR}{sPLSR components.}
+\item{cox_splsDR}{Final Cox-model.}
+\item{splsDR_mod}{The sPLSR model.}
 }
 \references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
 \author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
@@ -60,11 +62,11 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_pls_fit=coxpls(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls_fit=coxpls(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls_fit=coxpls(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
-
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit)
+(cox_splsDR2_fit=coxsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,eta=.5))
+(cox_splsDR2_fit=coxsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,eta=.5,trace=TRUE))
+(cox_splsDR2_fit=coxsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,dataXplan=X_train_micro_df,eta=.5))
+                                                                                                         
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_splsDR_fit,cox_splsDR_fit2,cox_splsDR_fit3)
 }
 \keyword{models}
 \keyword{regression}

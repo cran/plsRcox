@@ -8,8 +8,8 @@ This function computes the PLSR model with the Residuals of a Cox-Model fitted w
 }
 \usage{
 coxplsDR2(Xplan, \dots)
-\method{coxplsDR2}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot = FALSE, allres = FALSE, ...)
-\method{coxplsDR2}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
+\method{coxplsDR2}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE,sparse=FALSE,sparseStop=TRUE, ...)
+\method{coxplsDR2}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE, ...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -23,15 +23,24 @@ coxplsDR2(Xplan, \dots)
   \item{weighted}{if \code{TRUE} and the model was fit with case weights, then the weighted residuals are returned.}
   \item{scaleX}{Should the \code{Xplan} columns be standardized ?}
   \item{scaleY}{Should the \code{time} values be standardized ?}
-  \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used (taking account of any cross-validation).}
-  \item{validation}{character. What kind of (internal) validation to use. If \code{validation = "CV"}, cross-validation is performed. The number and type of cross-validation segments are specified with the arguments \code{segments} and \code{segment.type}. See \code{\link[pls]{mvrCv}} for details. If \code{validation = "LOO"}, leave-one-out cross-validation is performed. It is an error to specify the segments when \code{validation = "LOO"} is specified.}
+  \item{nt}{Number of PLSR components to fit.}
+  \item{typeVC}{type of leave one out crossed validation. Several procedures are available and may be forced.
+    \describe{
+      \item{\code{none}}{no crossed validation}
+      \item{\code{standard}}{as in SIMCA for datasets without missing values and with all values predicted as those with missing values for datasets with any missing values}
+      \item{\code{missingdata}}{all values predicted as those with missing values for datasets with any missing values}
+      \item{\code{adaptative}}{predict a response value for an x with any missing value as those with missing values and for an x without any missing value as those without missing values.}
+      }
+  }
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
   \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxplsDR2} is called.}  
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
-  \item{\dots}{Arguments to be passed on to \code{survival::coxph}.}
+  \item{sparse}{should the coefficients of non-significant predictors (<\code{alpha.pvals.expli}) be set to 0}
+  \item{sparseStop}{should component extraction stop when no significant predictors (<\code{alpha.pvals.expli}) are found}
+  \item{\dots}{Arguments to be passed on to \code{survival::coxph} and to \code{plsRglm::PLS_lm}.}
 }
 \details{
 If \code{allres=FALSE} returns only the final Cox-model.
@@ -50,21 +59,24 @@ If \code{allres=TRUE} :
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
-\seealso{\code{\link[survival]{coxph}}, \code{\link[pls]{plsr}}}
+\seealso{\code{\link[survival]{coxph}}, \code{\link[plsRglm]{PLS_lm}}}
 \examples{
 data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_plsDR2_fit=coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR2_fit=coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR2_fit=coxplsDR2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="none",dataXplan=X_train_micro_df))
+(cox_plsDR2_fit <- coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,nt=7))
+(cox_plsDR2_fit2 <- coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
+(cox_plsDR2_fit3 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=X_train_micro_df))
+(cox_plsDR2_fit4 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
+(cox_plsDR2_fit5 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
 
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit)
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit,cox_plsDR2_fit2,cox_plsDR2_fit3,cox_plsDR2_fit4,cox_plsDR2_fit5)
+
 }
 \keyword{models}
 \keyword{regression}

@@ -1,15 +1,15 @@
-\name{coxpls}
-\alias{coxpls}
-\alias{coxpls.default}
-\alias{coxpls.formula}
+\name{coxpls2}
+\alias{coxpls2}
+\alias{coxpls2.default}
+\alias{coxpls2.formula}
 \title{Fitting a Cox-Model on PLSR components}
 \description{
 This function computes the the Cox-Model with PLSR components as the explanatory variables. It uses the package \code{plsRglm}.
 }
 \usage{
-coxpls(Xplan, \dots)
-\method{coxpls}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,sparse=FALSE,sparseStop=TRUE,...)
-\method{coxpls}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE,...)
+coxpls2(Xplan, \dots)
+\method{coxpls2}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,sparse=FALSE,sparseStop=TRUE,...)
+\method{coxpls2}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -34,7 +34,7 @@ coxpls(Xplan, \dots)
   }
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
-  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls} is called.}  
+  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls2} is called.}  
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
@@ -48,11 +48,11 @@ If \code{allres=TRUE} returns a list with the PLS components, the final Cox-mode
 \code{allres=TRUE} is useful for evluating model prediction accuracy on a test sample.
 }
 \value{If \code{allres=FALSE} : 
-\item{cox_pls}{Final Cox-model.}
+\item{cox_pls2}{Final Cox-model.}
 If \code{allres=TRUE} :
-\item{tt_pls}{PLSR components.}
-\item{cox_pls}{Final Cox-model.}
-\item{pls_mod}{The PLSR model.}
+\item{tt_pls2}{PLSR components.}
+\item{cox_pls2}{Final Cox-model.}
+\item{pls2_mod}{The PLSR model.}
 }
 \references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
 \author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
@@ -65,17 +65,17 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_pls_fit <- coxpls(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls_fit2 <- coxpls(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls_fit3 <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df))
-(cox_pls_fit4 <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
-(cox_pls_fit5 <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
+(cox_pls2_fit <- coxpls2(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
+(cox_pls2_fit2 <- coxpls2(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
+(cox_pls2_fit3 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df))
+(cox_pls2_fit4 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
+(cox_pls2_fit5 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
                                                                                                          
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit,cox_pls_fit2,cox_pls_fit3,cox_pls_fit4,cox_pls_fit5)
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls2_fit,cox_pls2_fit2,cox_pls2_fit3,cox_pls2_fit4,cox_pls2_fit5)
 }
 \keyword{models}
 \keyword{regression}

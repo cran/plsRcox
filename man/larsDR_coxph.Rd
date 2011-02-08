@@ -9,7 +9,7 @@ This function computes the LASSO/LARS model with the Residuals of a Cox-Model fi
 \usage{
 larsDR_coxph(Xplan, \dots)
 \method{larsDR_coxph}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, use.Gram, allres = FALSE, ...)
-\method{larsDR_coxph}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, use.Gram, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE, ...)
+\method{larsDR_coxph}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, use.Gram, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE,model_matrix=FALSE, ...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -33,6 +33,7 @@ larsDR_coxph(Xplan, \dots)
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
+  \item{model_matrix}{If \code{TRUE}, the "unweighted" model matrix is returned.}
   \item{\dots}{Arguments to be passed on to \code{survival::coxph} or to \code{lars::lars}.}
 }
 \details{
@@ -59,7 +60,7 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 

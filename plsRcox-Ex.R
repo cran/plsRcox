@@ -67,11 +67,27 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
 (cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
+
+#Fixing sigma to compare with plsDR on Gram matrix; should be identical
+(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",hyperkernel=list(sigma=0.01292786)))
+
+library(kernlab)
+X_train_micro_kern <- kernelMatrix(rbfdot(sigma=0.01292786),scale(X_train_micro))
+(cox_DKplsDR_fit2=coxplsDR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,validation="CV",scaleX=FALSE))
+detach(package:kernlab)
+
+(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",kernel="laplacedot",hyperkernel=list(sigma=0.01292786)))
+
+library(kernlab)
+X_train_micro_kern <- kernelMatrix(laplacedot(sigma=0.01292786),scale(X_train_micro))
+(cox_DKplsDR_fit2=coxplsDR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,validation="CV",scaleX=FALSE))
+detach(package:kernlab)
+
 (cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
 (cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
 
@@ -79,223 +95,20 @@ C_train_micro <- micro.censure$DC[1:80]
 (cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
 (cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=X_train_micro_df))
 
+
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKplsDR_fit)
 
 
 
 cleanEx()
-nameEx("cox_glcoxph_supp_vals_KM")
-### * cox_glcoxph_supp_vals_KM
+nameEx("coxDKsplsDR")
+### * coxDKsplsDR
 
 flush(stderr()); flush(stdout())
 
-### Name: cox_glcoxph_supp_vals_KM
-### Title: Demo dataset
-### Aliases: cox_glcoxph_supp_vals_KM
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_glcoxph_supp_vals_KM)
-
-
-
-cleanEx()
-nameEx("cox_glcoxph_supp_vals_KM_micro")
-### * cox_glcoxph_supp_vals_KM_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_glcoxph_supp_vals_KM_micro
-### Title: Demo dataset
-### Aliases: cox_glcoxph_supp_vals_KM_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_glcoxph_supp_vals_KM_micro)
-
-
-
-cleanEx()
-nameEx("cox_glcoxph_supp_vals_NNE")
-### * cox_glcoxph_supp_vals_NNE
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_glcoxph_supp_vals_NNE
-### Title: Demo dataset
-### Aliases: cox_glcoxph_supp_vals_NNE
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_glcoxph_supp_vals_NNE)
-
-
-
-cleanEx()
-nameEx("cox_glcoxph_supp_vals_NNE_micro")
-### * cox_glcoxph_supp_vals_NNE_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_glcoxph_supp_vals_NNE_micro
-### Title: Demo dataset
-### Aliases: cox_glcoxph_supp_vals_NNE_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_glcoxph_supp_vals_NNE_micro)
-
-
-
-cleanEx()
-nameEx("cox_pls2_supp_vals_KM")
-### * cox_pls2_supp_vals_KM
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_pls2_supp_vals_KM
-### Title: Demo dataset
-### Aliases: cox_pls2_supp_vals_KM
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_pls2_supp_vals_KM)
-
-
-
-cleanEx()
-nameEx("cox_pls2_supp_vals_KM_micro")
-### * cox_pls2_supp_vals_KM_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_pls2_supp_vals_KM_micro
-### Title: Demo dataset
-### Aliases: cox_pls2_supp_vals_KM_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_pls2_supp_vals_KM_micro)
-
-
-
-cleanEx()
-nameEx("cox_pls2_supp_vals_NNE")
-### * cox_pls2_supp_vals_NNE
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_pls2_supp_vals_NNE
-### Title: Demo dataset
-### Aliases: cox_pls2_supp_vals_NNE
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_pls2_supp_vals_NNE)
-
-
-
-cleanEx()
-nameEx("cox_pls2_supp_vals_NNE_micro")
-### * cox_pls2_supp_vals_NNE_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_pls2_supp_vals_NNE_micro
-### Title: Demo dataset
-### Aliases: cox_pls2_supp_vals_NNE_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_pls2_supp_vals_NNE_micro)
-
-
-
-cleanEx()
-nameEx("cox_plsDR2_supp_vals_KM")
-### * cox_plsDR2_supp_vals_KM
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_plsDR2_supp_vals_KM
-### Title: Demo dataset
-### Aliases: cox_plsDR2_supp_vals_KM
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_plsDR2_supp_vals_KM)
-
-
-
-cleanEx()
-nameEx("cox_plsDR2_supp_vals_KM_micro")
-### * cox_plsDR2_supp_vals_KM_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_plsDR2_supp_vals_KM_micro
-### Title: Demo dataset
-### Aliases: cox_plsDR2_supp_vals_KM_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_plsDR2_supp_vals_KM_micro)
-
-
-
-cleanEx()
-nameEx("cox_plsDR2_supp_vals_NNE")
-### * cox_plsDR2_supp_vals_NNE
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_plsDR2_supp_vals_NNE
-### Title: Demo dataset
-### Aliases: cox_plsDR2_supp_vals_NNE
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_plsDR2_supp_vals_NNE)
-
-
-
-cleanEx()
-nameEx("cox_plsDR2_supp_vals_NNE_micro")
-### * cox_plsDR2_supp_vals_NNE_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: cox_plsDR2_supp_vals_NNE_micro
-### Title: Demo dataset
-### Aliases: cox_plsDR2_supp_vals_NNE_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(cox_plsDR2_supp_vals_NNE_micro)
-
-
-
-cleanEx()
-nameEx("coxpls")
-### * coxpls
-
-flush(stderr()); flush(stdout())
-
-### Name: coxpls
-### Title: Fitting a Cox-Model on PLSR components
-### Aliases: coxpls coxpls.default coxpls.formula
+### Name: coxDKsplsDR
+### Title: Fitting a Direct Kernel sPLSR model on the (Deviance) Residuals
+### Aliases: coxDKsplsDR coxDKsplsDR.default coxDKsplsDR.formula
 ### Keywords: models regression
 
 ### ** Examples
@@ -304,23 +117,25 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_pls_fit <- coxpls(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls_fit2 <- coxpls(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls_fit3 <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df))
-(cox_pls_fit4 <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
-(cox_pls_fit5 <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
-                                                                                                         
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit,cox_pls_fit2,cox_pls_fit3,cox_pls_fit4,cox_pls_fit5)
+(cox_DKsplsDR_fit=coxDKsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=data.frame(X_train_micro),eta=.5))
+
+(cox_DKsplsDR_fit=coxDKsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=data.frame(X_train_micro),eta=.5))
+
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKsplsDR_fit)
 
 
 
 cleanEx()
-nameEx("coxpls2")
-### * coxpls2
+nameEx("coxpls")
+### * coxpls
 
 flush(stderr()); flush(stdout())
 
@@ -335,15 +150,46 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_pls2_fit=coxpls2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls2_fit=coxpls2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls2_fit=coxpls2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
+(cox_pls2_fit <- coxpls2(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
+(cox_pls2_fit2 <- coxpls2(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
+(cox_pls2_fit3 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df))
+(cox_pls2_fit4 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
+(cox_pls2_fit5 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
+                                                                                                         
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls2_fit,cox_pls2_fit2,cox_pls2_fit3,cox_pls2_fit4,cox_pls2_fit5)
 
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls2_fit)
+
+
+cleanEx()
+nameEx("coxpls2")
+### * coxpls2
+
+flush(stderr()); flush(stdout())
+
+### Name: coxpls
+### Title: Fitting a Cox-Model on PLSR components
+### Aliases: coxpls coxpls.default coxpls.formula
+### Keywords: models regression
+
+### ** Examples
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+(cox_pls_fit=coxpls(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
+(cox_pls_fit=coxpls(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
+(cox_pls_fit=coxpls(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
+
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit)
 
 
 
@@ -364,17 +210,15 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_plsDR_fit <- coxplsDR(X_train_micro,Y_train_micro,C_train_micro,nt=7))
-(cox_plsDR_fit2 <- coxplsDR(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
-(cox_plsDR_fit3 <- coxplsDR(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=X_train_micro_df))
-(cox_plsDR_fit4 <- coxplsDR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
-(cox_plsDR_fit5 <- coxplsDR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
-                                                                                                         
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR_fit,cox_plsDR_fit2,cox_plsDR_fit3,cox_plsDR_fit4,cox_plsDR_fit5)
+(cox_plsDR_fit=coxplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
+(cox_plsDR_fit2=coxplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
+(cox_plsDR_fit3=coxplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="none",dataXplan=X_train_micro_df))
+
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR_fit,cox_plsDR_fit2,cox_plsDR_fit3)
 
 
 
@@ -395,15 +239,47 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_plsDR2_fit=coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR2_fit=coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR2_fit=coxplsDR2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="none",dataXplan=X_train_micro_df))
+(cox_plsDR2_fit <- coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,nt=7))
+(cox_plsDR2_fit2 <- coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
+(cox_plsDR2_fit3 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=X_train_micro_df))
+(cox_plsDR2_fit4 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
+(cox_plsDR2_fit5 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
 
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit)
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit,cox_plsDR2_fit2,cox_plsDR2_fit3,cox_plsDR2_fit4,cox_plsDR2_fit5)
+
+
+
+
+cleanEx()
+nameEx("coxsplsDR")
+### * coxsplsDR
+
+flush(stderr()); flush(stdout())
+
+### Name: coxsplsDR
+### Title: Fitting a sPLSR model on the (Deviance) Residuals
+### Aliases: coxsplsDR coxsplsDR.default coxsplsDR.formula
+### Keywords: models regression
+
+### ** Examples
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+(cox_splsDR2_fit=coxsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,eta=.5))
+(cox_splsDR2_fit=coxsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,eta=.5,trace=TRUE))
+(cox_splsDR2_fit=coxsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,dataXplan=X_train_micro_df,eta=.5))
+                                                                                                         
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_splsDR_fit,cox_splsDR_fit2,cox_splsDR_fit3)
 
 
 
@@ -424,7 +300,7 @@ data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
 X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
-X_train_micro_df <- Xmicro.censure_compl_imp[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
@@ -437,74 +313,6 @@ larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FAL
 larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,allres=TRUE)
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_larsDR_fit)
-
-
-
-cleanEx()
-nameEx("lars_supp_vals_KM")
-### * lars_supp_vals_KM
-
-flush(stderr()); flush(stdout())
-
-### Name: lars_supp_vals_KM
-### Title: Demo dataset
-### Aliases: lars_supp_vals_KM
-### Keywords: datasets
-
-### ** Examples
-
-data(lars_supp_vals_KM)
-
-
-
-cleanEx()
-nameEx("lars_supp_vals_KM_micro")
-### * lars_supp_vals_KM_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: lars_supp_vals_KM_micro
-### Title: Demo dataset
-### Aliases: lars_supp_vals_KM_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(lars_supp_vals_KM_micro)
-
-
-
-cleanEx()
-nameEx("lars_supp_vals_NNE")
-### * lars_supp_vals_NNE
-
-flush(stderr()); flush(stdout())
-
-### Name: lars_supp_vals_NNE
-### Title: Demo dataset
-### Aliases: lars_supp_vals_NNE
-### Keywords: datasets
-
-### ** Examples
-
-data(lars_supp_vals_NNE)
-
-
-
-cleanEx()
-nameEx("lars_supp_vals_NNE_micro")
-### * lars_supp_vals_NNE_micro
-
-flush(stderr()); flush(stdout())
-
-### Name: lars_supp_vals_NNE_micro
-### Title: Demo dataset
-### Aliases: lars_supp_vals_NNE_micro
-### Keywords: datasets
-
-### ** Examples
-
-data(lars_supp_vals_NNE_micro)
 
 
 
@@ -536,117 +344,147 @@ nameEx("plsRcox-package")
 
 flush(stderr()); flush(stdout())
 
-### Name: plsRcox-package
-### Title: Partial least squares Regression for Cox models and related
-###   techniques
-### Aliases: plsRcox-package plsRcox
+### Name: plsRglm-package
+### Title: Partial least squares Regression for generalized linear models
+### Aliases: plsRglm-package
 ### Keywords: package
 
 ### ** Examples
 
-## Not run: 
-##D data(micro.censure)
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D DR_coxph(Y_train_micro,C_train_micro,plot=TRUE)
-##D DR_coxph(Y_train_micro,C_train_micro,scaleY=FALSE,plot=TRUE)
-##D DR_coxph(Y_train_micro,C_train_micro,scaleY=TRUE,plot=TRUE)
-##D 
-##D rm(Y_train_micro,C_train_micro)
-##D 
-##D 
-##D data(micro.censure)
-##D data(Xmicro.censure_compl_imp)
-##D 
-##D X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D (cox_larsDR_fit <- larsDR_coxph(X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE))
-##D (cox_larsDR_fit <- larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE))
-##D (cox_larsDR_fit <- larsDR_coxph(~.,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,dataXplan=data.frame(X_train_micro)))
-##D 
-##D larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE)
-##D larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=FALSE)
-##D larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,allres=TRUE)
-##D 
-##D rm(X_train_micro,Y_train_micro,C_train_micro,cox_larsDR_fit)
-##D 
-##D 
-##D data(micro.censure)
-##D data(Xmicro.censure_compl_imp)
-##D 
-##D X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D (cox_pls_fit <- coxpls(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-##D (cox_pls_fit <- coxpls(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-##D (cox_pls_fit <- coxpls(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=data.frame(X_train_micro)))
-##D 
-##D rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit)
-##D 
-##D 
-##D data(micro.censure)
-##D data(Xmicro.censure_compl_imp)
-##D 
-##D X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D (cox_pls2_fit=coxpls2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-##D (cox_pls2_fit=coxpls2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-##D (cox_pls2_fit=coxpls2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=data.frame(X_train_micro)))
-##D 
-##D rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls2_fit)
-##D 
-##D 
-##D data(micro.censure)
-##D data(Xmicro.censure_compl_imp)
-##D 
-##D X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D (cox_plsDR_fit <- coxplsDR(X_train_micro,Y_train_micro,C_train_micro,nt=7))
-##D (cox_plsDR_fit <- coxplsDR(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
-##D (cox_plsDR_fit <- coxplsDR(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=data.frame(X_train_micro)))
-##D 
-##D rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR_fit)
-##D 
-##D 
-##D data(micro.censure)
-##D data(Xmicro.censure_compl_imp)
-##D 
-##D X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D (cox_plsDR2_fit=coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-##D (cox_plsDR2_fit=coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-##D (cox_plsDR2_fit=coxplsDR2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="none",dataXplan=data.frame(X_train_micro)))
-##D 
-##D rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit)
-##D 
-##D 
-##D data(micro.censure)
-##D data(Xmicro.censure_compl_imp)
-##D 
-##D X_train_micro <- Xmicro.censure_compl_imp[1:80,]
-##D Y_train_micro <- micro.censure$survyear[1:80]
-##D C_train_micro <- micro.censure$DC[1:80]
-##D 
-##D (cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-##D (cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-##D (cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=data.frame(X_train_micro)))
-##D 
-##D (cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-##D (cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-##D (cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=data.frame(X_train_micro)))
-##D 
-##D rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKplsDR_fit)
-## End(Not run)
+
+
+
+cleanEx()
+nameEx("plsRcox")
+### * plsRcox
+
+flush(stderr()); flush(stdout())
+
+### Name: plsRcox
+### Title: Partial least squares Regression generalized linear models
+### Aliases: plsRcox plsRcoxmodel.default plsRcoxmodel.formula
+### Keywords: models regression
+
+### ** Examples
+
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+X_train_micro_df <- data.frame(X_train_micro)
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5)$InfCrit
+plsRcox(~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5)$InfCrit
+
+plsRcox(Xplan=X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,alpha.pvals.expli=.15)$InfCrit
+plsRcox(Xplan=~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,alpha.pvals.expli=.15)$InfCrit
+
+
+
+
+cleanEx()
+nameEx("predict.plsRcoxmodel")
+### * predict.plsRcoxmodel
+
+flush(stderr()); flush(stdout())
+
+### Name: predict.plsRcoxmodel
+### Title: Print method for plsRcox models
+### Aliases: predict.plsRcoxmodel
+### Keywords: methods predict
+
+### ** Examples
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+modpls <- plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=3)
+
+predict(modpls)    
+#Identical to predict(modpls,type="lp")    
+
+
+
+
+cleanEx()
+nameEx("print.plsRcoxmodel")
+### * print.plsRcoxmodel
+
+flush(stderr()); flush(stdout())
+
+### Name: print.plsRcoxmodel
+### Title: Print method for plsRcox models
+### Aliases: print.plsRcoxmodel
+### Keywords: methods print
+
+### ** Examples
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+modpls <- plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=3)
+print(modpls)
+
+
+
+cleanEx()
+nameEx("print.summary.plsRcoxmodel")
+### * print.summary.plsRcoxmodel
+
+flush(stderr()); flush(stdout())
+
+### Name: print.summary.plsRcoxmodel
+### Title: Print method for summaries of plsRcox models
+### Aliases: print.summary.plsRcoxmodel
+### Keywords: methods print
+
+### ** Examples
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+modpls <- plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=3)
+print(summary(modpls))
+
+
+
+cleanEx()
+nameEx("summary.plsRcoxmodel")
+### * summary.plsRcoxmodel
+
+flush(stderr()); flush(stdout())
+
+### Name: summary.plsRcoxmodel
+### Title: Summary method for plsRcox models
+### Aliases: summary.plsRcoxmodel
+### Keywords: methods print
+
+### ** Examples
+
+data(micro.censure)
+data(Xmicro.censure_compl_imp)
+
+X_train_micro <- apply((as.matrix(Xmicro.censure_compl_imp)),FUN="as.numeric",MARGIN=2)[1:80,]
+Y_train_micro <- micro.censure$survyear[1:80]
+C_train_micro <- micro.censure$DC[1:80]
+
+modpls <- plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=3)
+summary(modpls)
 
 
 

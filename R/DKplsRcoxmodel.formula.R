@@ -1,4 +1,4 @@
-larsDR_coxph.formula <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=FALSE, scaleY=TRUE, plot=FALSE, typelars="lasso", normalize = TRUE, max.steps, use.Gram = TRUE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,model_matrix=FALSE,...) {
+DKplsRcoxmodel.formula <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted,scaleX=TRUE,scaleY=NULL,dataXplan=NULL, nt=min(2,ncol(Xplan)),limQ2set=.0975, dataPredictY=Xplan, pvals.expli=FALSE, model_frame=FALSE, alpha.pvals.expli=.05,tol_Xi=10^(-12),weights,subset,control,sparse=FALSE,sparseStop=TRUE, plot=FALSE, allres=FALSE, kernel="rbfdot", hyperkernel,...) {  
 
 if (missing(dataXplan)) 
 dataXplan <- environment(Xplan)
@@ -23,12 +23,10 @@ if (length(dim(Y)) == 1L) {
 Xplan <- if (!is.empty.model(mt0)) model.matrix(mt0, mf0, contrasts)[,-1]
 else matrix(, NROW(Y), 0L)
 weights <- as.vector(model.weights(mf0))
-if (model_matrix) {attr(Xplan,"weights") <- weights ; return(Xplan)}
 if (!is.null(weights) && !is.numeric(weights)) 
     stop("'weights' must be a numeric vector")
 if (!is.null(weights) && any(weights < 0)) 
     stop("negative weights not allowed")
-
-NextMethod("larsDR_coxph")
+NextMethod("DKplsRcoxmodel")
 
 }

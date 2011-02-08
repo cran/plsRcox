@@ -1,4 +1,4 @@
-larsDR_coxph.formula <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=FALSE, scaleY=TRUE, plot=FALSE, typelars="lasso", normalize = TRUE, max.steps, use.Gram = TRUE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,model_matrix=FALSE,...) {
+coxsplsDR.formula <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE, eta, trace=FALSE,...) {
 
 if (missing(dataXplan)) 
 dataXplan <- environment(Xplan)
@@ -23,12 +23,10 @@ if (length(dim(Y)) == 1L) {
 Xplan <- if (!is.empty.model(mt0)) model.matrix(mt0, mf0, contrasts)[,-1]
 else matrix(, NROW(Y), 0L)
 weights <- as.vector(model.weights(mf0))
-if (model_matrix) {attr(Xplan,"weights") <- weights ; return(Xplan)}
 if (!is.null(weights) && !is.numeric(weights)) 
     stop("'weights' must be a numeric vector")
 if (!is.null(weights) && any(weights < 0)) 
     stop("negative weights not allowed")
 
-NextMethod("larsDR_coxph")
-
+NextMethod("coxplsDR2")
 }

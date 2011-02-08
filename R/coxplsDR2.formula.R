@@ -1,4 +1,4 @@
-coxplsDR2.formula <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...) {
+coxplsDR2.formula <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE,...) {
 
 if (missing(dataXplan)) 
 dataXplan <- environment(Xplan)
