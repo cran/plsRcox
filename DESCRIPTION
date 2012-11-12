@@ -1,6 +1,6 @@
 Package: plsRcox
-Version: 0.7.0
-Date: 2011-02-08
+Version: 0.7.6
+Date: 2012-11-12
 Depends: R (>= 2.4.0)
 Imports: boot, plsRglm, lars, survival, pls, spls, kernlab
 Enhances:
@@ -22,6 +22,6 @@ License: GPL-3
 Encoding: latin1
 URL: http://www-irma.u-strasbg.fr/~fbertran/
 Classification/MSC: 62N01, 62N02, 62N03, 62N99
-Packaged: 2012-03-30 10:47:07 UTC; Bertrand
+Packaged: 2012-11-12 10:41:12 UTC; Bertrand
 Repository: CRAN
-Date/Publication: 2012-03-30 14:40:28
+Date/Publication: 2012-11-12 16:05:36
