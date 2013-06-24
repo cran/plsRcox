@@ -1,11 +1,11 @@
 Package: plsRcox
-Version: 0.7.6
-Date: 2012-11-12
+Version: 0.9
+Date: 2013-24-06
 Depends: R (>= 2.4.0)
-Imports: boot, plsRglm, lars, survival, pls, spls, kernlab
+Imports: boot, plsRglm, lars, survival, pls, spls, kernlab, mixOmics
 Enhances:
 Suggests: glcoxph, survivalROC, plsRglm, lars, survival, pls, spls,
-        kernlab, plsRcox, plsdof
+        kernlab, plsRcox, plsdof, mixOmics
 Title: Partial least squares Regression for Cox models and related
         techniques
 Author: Frederic Bertrand <frederic.bertrand@math.unistra.fr>, Myriam
@@ -22,6 +22,7 @@ License: GPL-3
 Encoding: latin1
 URL: http://www-irma.u-strasbg.fr/~fbertran/
 Classification/MSC: 62N01, 62N02, 62N03, 62N99
-Packaged: 2012-11-12 10:41:12 UTC; Bertrand
+Packaged: 2013-06-29 22:12:29 UTC; Bertrand
+NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2012-11-12 16:05:36
+Date/Publication: 2013-07-02 15:38:53

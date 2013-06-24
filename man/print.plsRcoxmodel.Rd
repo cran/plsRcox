@@ -23,6 +23,7 @@ This function provides a print method for the class \code{"plsRcoxmodel"}
 }
 \seealso{\code{\link{print}}}
 \examples{
+\donttest{
 data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
@@ -32,6 +33,7 @@ C_train_micro <- micro.censure$DC[1:80]
 
 modpls <- plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=3)
 print(modpls)
+}
 }
 \keyword{methods}
 \keyword{print}

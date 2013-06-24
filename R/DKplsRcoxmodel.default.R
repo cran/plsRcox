@@ -30,8 +30,8 @@ if(missing(hyperkernel)){if(kernel=="rbfdot"){
 mf2c <- match.call(expand.dots = FALSE)
 m2c <- match(NULL, names(mf2c), 0L)
 mf2c <- mf2c[c(1L, m2c)]
-mf2c$x <- as.formula(RepY~.)
-mf2c$data <- ExpliX
+mf2c$x <- ExpliX
+mf2c$scaled <- FALSE
 mf2c[[1L]] <- as.name("sigest")
 srangeDKplsRcox_mod <- eval(mf2c, parent.frame())
 hyperkernel=list(sigma = srangeDKplsRcox_mod[2])
@@ -42,8 +42,8 @@ if(kernel=="laplacedot"){
 mf2c <- match.call(expand.dots = FALSE)
 m2c <- match(NULL, names(mf2c), 0L)
 mf2c <- mf2c[c(1L, m2c)]
-mf2c$x <- as.formula(DR_coxph~.)
-mf2c$data <- ExpliX
+mf2c$x <- ExpliX
+mf2c$scaled <- FALSE
 mf2c[[1L]] <- as.name("sigest")
 srangeDKplsRcox_mod <- eval(mf2c, parent.frame())
 hyperkernel=list(sigma = srangeDKplsRcox_mod[2])
@@ -77,5 +77,5 @@ cox_DKplsRcox$call$data <- as.name("tt_DKplsRcox")
 
 
 if(!allres){return(cox_DKplsRcox)}
-else {return(list(tt_DKplsRcox=tt_DKplsRcox, cox_DKplsRcox=cox_DKplsRcox, DKplsRcox_mod=DKplsRcox_mod, kernDKplsRcox_mod=kernDKplsRcox_mod))}
+else {return(list(tt_DKplsRcox=tt_DKplsRcox, cox_DKplsRcox=cox_DKplsRcox, DKplsRcox_mod=DKplsRcox_mod, kernDKplsRcox_mod=kernDKplsRcox_mod, XplanScal=attr(ExpliX,"scaled:scale"), XplanCent= attr(ExpliX,"scaled:center") ))}
 }

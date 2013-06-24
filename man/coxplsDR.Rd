@@ -8,8 +8,8 @@ This function computes the PLSR model with the Residuals of a Cox-Model fitted w
 }
 \usage{
 coxplsDR(Xplan, \dots)
-\method{coxplsDR}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot = FALSE, allres = FALSE, ...)
-\method{coxplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
+\method{coxplsDR}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot = FALSE, allres = FALSE, ...)
+\method{coxplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -23,8 +23,8 @@ coxplsDR(Xplan, \dots)
   \item{weighted}{if \code{TRUE} and the model was fit with case weights, then the weighted residuals are returned.}
   \item{scaleX}{Should the \code{Xplan} columns be standardized ?}
   \item{scaleY}{Should the \code{time} values be standardized ?}
-  \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used (taking account of any cross-validation).}
-  \item{validation}{character. What kind of (internal) validation to use. If \code{validation = "CV"}, cross-validation is performed. The number and type of cross-validation segments are specified with the arguments \code{segments} and \code{segment.type}. See \code{\link[pls]{mvrCv}} for details. If \code{validation = "LOO"}, leave-one-out cross-validation is performed. It is an error to specify the segments when \code{validation = "LOO"} is specified.}
+  \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used.}
+  \item{modepls}{character string. What type of algorithm to use, (partially) matching one of "regression", "canonical", "invariant" or "classic". See \code{\link[mixOmics]{pls}} for details}
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
   \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxplsDR} is called.}  
@@ -60,9 +60,9 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_plsDR_fit=coxplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR_fit2=coxplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="none"))
-(cox_plsDR_fit3=coxplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="none",dataXplan=X_train_micro_df))
+(cox_plsDR_fit=coxplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6))
+(cox_plsDR_fit2=coxplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6))
+(cox_plsDR_fit3=coxplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,dataXplan=X_train_micro_df))
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR_fit,cox_plsDR_fit2,cox_plsDR_fit3)
 }

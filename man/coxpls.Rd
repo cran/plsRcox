@@ -1,15 +1,15 @@
-\name{coxpls2}
-\alias{coxpls2}
-\alias{coxpls2.default}
-\alias{coxpls2.formula}
+\name{coxpls}
+\alias{coxpls}
+\alias{coxpls.default}
+\alias{coxpls.formula}
 \title{Fitting a Cox-Model on PLSR components}
 \description{
-This function computes the the Cox-Model with PLSR components as the explanatory variables. It uses the package \code{plsRglm}.
+This function computes the the Cox-Model with PLSR components as the explanatory variables. It uses the package \code{pls}.
 }
 \usage{
-coxpls2(Xplan, \dots)
-\method{coxpls2}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,sparse=FALSE,sparseStop=TRUE,...)
-\method{coxpls2}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE,...)
+coxpls(Xplan, \dots)
+\method{coxpls}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE,...)
+\method{coxpls}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -23,24 +23,15 @@ coxpls2(Xplan, \dots)
   \item{weighted}{if \code{TRUE} and the model was fit with case weights, then the weighted residuals are returned.}
   \item{scaleX}{Should the \code{Xplan} columns be standardized ?}
   \item{scaleY}{Should the \code{time} values be standardized ?}
-  \item{nt}{Number of PLSR components to fit.}
-  \item{typeVC}{type of leave one out crossed validation. Several procedures are available and may be forced.
-    \describe{
-      \item{\code{none}}{no crossed validation}
-      \item{\code{standard}}{as in SIMCA for datasets without missing values and with all values predicted as those with missing values for datasets with any missing values}
-      \item{\code{missingdata}}{all values predicted as those with missing values for datasets with any missing values}
-      \item{\code{adaptative}}{predict a response value for an x with any missing value as those with missing values and for an x without any missing value as those without missing values.}
-      }
-  }
+  \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used.}
+  \item{modepls}{character string. What type of algorithm to use, (partially) matching one of "regression", "canonical", "invariant" or "classic". See \code{\link[mixOmics]{pls}} for details}
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
-  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls2} is called.}  
+  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls} is called.}  
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
-  \item{sparse}{should the coefficients of non-significant predictors (<\code{alpha.pvals.expli}) be set to 0}
-  \item{sparseStop}{should component extraction stop when no significant predictors (<\code{alpha.pvals.expli}) are found}
-  \item{\dots}{Arguments to be passed on to \code{survival::coxph} and to \code{plsRglm::PLS_lm}.}
+  \item{\dots}{Arguments to be passed on to \code{survival::coxph}.}
 }
 \details{
 If \code{allres=FALSE} returns only the final Cox-model.
@@ -48,18 +39,18 @@ If \code{allres=TRUE} returns a list with the PLS components, the final Cox-mode
 \code{allres=TRUE} is useful for evluating model prediction accuracy on a test sample.
 }
 \value{If \code{allres=FALSE} : 
-\item{cox_pls2}{Final Cox-model.}
+\item{cox_pls}{Final Cox-model.}
 If \code{allres=TRUE} :
-\item{tt_pls2}{PLSR components.}
-\item{cox_pls2}{Final Cox-model.}
-\item{pls2_mod}{The PLSR model.}
+\item{tt_pls}{PLSR components.}
+\item{cox_pls}{Final Cox-model.}
+\item{pls_mod}{The PLSR model.}
 }
 \references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
 \author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
-\seealso{\code{\link[survival]{coxph}}, \code{\link[plsRglm]{PLS_lm}}}
+\seealso{\code{\link[survival]{coxph}}, \code{\link[pls]{plsr}}}
 \examples{
 data(micro.censure)
 data(Xmicro.censure_compl_imp)
@@ -69,13 +60,11 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_pls2_fit <- coxpls2(X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls2_fit2 <- coxpls2(~X_train_micro,Y_train_micro,C_train_micro,nt=7,typeVC="none"))
-(cox_pls2_fit3 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df))
-(cox_pls2_fit4 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
-(cox_pls2_fit5 <- coxpls2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
-                                                                                                         
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls2_fit,cox_pls2_fit2,cox_pls2_fit3,cox_pls2_fit4,cox_pls2_fit5)
+(cox_pls_fit=coxpls(X_train_micro,Y_train_micro,C_train_micro,ncomp=6))
+(cox_pls_fit=coxpls(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6))
+(cox_pls_fit=coxpls(~.,Y_train_micro,C_train_micro,ncomp=6,dataXplan=X_train_micro_df))
+
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit)
 }
 \keyword{models}
 \keyword{regression}

@@ -64,7 +64,7 @@ Use \code{plsRcox} instead.
 }
 \seealso{\code{\link[plsRglm]{plsR}} and \code{\link[plsRglm]{plsRglm}}}
 \examples{
-
+\donttest{
 data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
@@ -78,6 +78,6 @@ plsRcox(~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5)$InfCrit
 
 plsRcox(Xplan=X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,alpha.pvals.expli=.15)$InfCrit
 plsRcox(Xplan=~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,alpha.pvals.expli=.15)$InfCrit
-
+}
 }\keyword{models}
 \keyword{regression}

@@ -1,15 +1,15 @@
-\name{coxpls}
-\alias{coxpls}
-\alias{coxpls.default}
-\alias{coxpls.formula}
+\name{coxpls2}
+\alias{coxpls2}
+\alias{coxpls2.default}
+\alias{coxpls2.formula}
 \title{Fitting a Cox-Model on PLSR components}
 \description{
 This function computes the the Cox-Model with PLSR components as the explanatory variables. It uses the package \code{pls}.
 }
 \usage{
-coxpls(Xplan, \dots)
-\method{coxpls}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,...)
-\method{coxpls}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
+coxpls2(Xplan, \dots)
+\method{coxpls2}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", validation = "CV", plot=FALSE, allres=FALSE,...)
+\method{coxpls2}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -24,10 +24,11 @@ coxpls(Xplan, \dots)
   \item{scaleX}{Should the \code{Xplan} columns be standardized ?}
   \item{scaleY}{Should the \code{time} values be standardized ?}
   \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used (taking account of any cross-validation).}
+  \item{methodpls}{The multivariate regression method to be used. See \code{\link[pls]{mvrCv}} for details.}
   \item{validation}{character. What kind of (internal) validation to use. If \code{validation = "CV"}, cross-validation is performed. The number and type of cross-validation segments are specified with the arguments \code{segments} and \code{segment.type}. See \code{\link[pls]{mvrCv}} for details. If \code{validation = "LOO"}, leave-one-out cross-validation is performed. It is an error to specify the segments when \code{validation = "LOO"} is specified.}
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
-  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls} is called.}  
+  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls2} is called.}  
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
@@ -60,9 +61,9 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_pls_fit=coxpls(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls_fit=coxpls(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_pls_fit=coxpls(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
+(cox_pls_fit=coxpls2(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
+(cox_pls_fit=coxpls2(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
+(cox_pls_fit=coxpls2(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls_fit)
 }

@@ -57,11 +57,13 @@ This dataset provides Microsat specifications and survival times.
 \source{Allelotyping identification of genomic alterations in rectal chromosomally unstable tumors without preoperative treatment, \enc{Benoît}{Beno\^it} Romain, \enc{Agnès}{Agn\`es} Neuville, Nicolas Meyer, \enc{Cécile}{C\'ecile} Brigand, Serge Rohr, Anne Schneider, Marie-Pierre Gaub and Dominique Guenot, \emph{BMC Cancer 2010}, 10:561, doi:10.1186/1471-2407-10-561.}
 \references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
 \examples{
+\donttest{
 data(micro.censure)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 Y_test_micro <- micro.censure$survyear[81:117]
 C_test_micro <- micro.censure$DC[81:117]
 rm(Y_train_micro,C_train_micro,Y_test_micro,C_test_micro)
+}
 }
 \keyword{datasets}

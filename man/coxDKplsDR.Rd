@@ -8,8 +8,8 @@ This function computes the Direct Kernel PLSR model with the Residuals of a Cox-
 }
 \usage{
 coxDKplsDR(Xplan, \dots)
-\method{coxDKplsDR}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE, kernel="rbfdot",hyperkernel,...)
-\method{coxDKplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE, kernel="rbfdot",hyperkernel,...)
+\method{coxDKplsDR}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE, kernel="rbfdot",hyperkernel,...)
+\method{coxDKplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE, kernel="rbfdot",hyperkernel,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -23,8 +23,8 @@ coxDKplsDR(Xplan, \dots)
   \item{weighted}{if \code{TRUE} and the model was fit with case weights, then the weighted residuals are returned.}
   \item{scaleX}{Should the \code{Xplan} columns be standardized ?}
   \item{scaleY}{Should the \code{time} values be standardized ?}
-  \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used (taking account of any cross-validation).}
-  \item{validation}{character. What kind of (internal) validation to use. If \code{validation = "CV"}, cross-validation is performed. The number and type of cross-validation segments are specified with the arguments \code{segments} and \code{segment.type}. See \code{\link[pls]{mvrCv}} for details. If \code{validation = "LOO"}, leave-one-out cross-validation is performed. It is an error to specify the segments when \code{validation = "LOO"} is specified.}
+  \item{ncomp}{The number of components to include in the model. The number of components to fit is specified with the argument ncomp. It this is not supplied, the maximal number of components is used.}
+  \item{modepls}{character string. What type of algorithm to use, (partially) matching one of "regression", "canonical", "invariant" or "classic". See \code{\link[mixOmics]{pls}} for details}  
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
   \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxDKplsDR} is called.}  
@@ -81,29 +81,29 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
+(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6))
 
 #Fixing sigma to compare with plsDR on Gram matrix; should be identical
-(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",hyperkernel=list(sigma=0.01292786)))
+(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,hyperkernel=list(sigma=0.01292786)))
 
 library(kernlab)
 X_train_micro_kern <- kernelMatrix(rbfdot(sigma=0.01292786),scale(X_train_micro))
-(cox_DKplsDR_fit2=coxplsDR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,validation="CV",scaleX=FALSE))
+(cox_DKplsDR_fit2=coxplsDR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,scaleX=FALSE))
 detach(package:kernlab)
 
-(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",kernel="laplacedot",hyperkernel=list(sigma=0.01292786)))
+(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,kernel="laplacedot",hyperkernel=list(sigma=0.01292786)))
 
 library(kernlab)
 X_train_micro_kern <- kernelMatrix(laplacedot(sigma=0.01292786),scale(X_train_micro))
-(cox_DKplsDR_fit2=coxplsDR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,validation="CV",scaleX=FALSE))
+(cox_DKplsDR_fit2=coxplsDR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,scaleX=FALSE))
 detach(package:kernlab)
 
-(cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
+(cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6))
+(cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,dataXplan=X_train_micro_df))
 
-(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-(cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-(cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=X_train_micro_df))
+(cox_DKplsDR_fit=coxDKplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,allres=TRUE))
+(cox_DKplsDR_fit=coxDKplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,allres=TRUE))
+(cox_DKplsDR_fit=coxDKplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,allres=TRUE,dataXplan=X_train_micro_df))
 
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKplsDR_fit)

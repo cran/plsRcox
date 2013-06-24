@@ -1,15 +1,15 @@
-\name{coxplsDR2}
-\alias{coxplsDR2}
-\alias{coxplsDR2.default}
-\alias{coxplsDR2.formula}
+\name{coxpls3DR}
+\alias{coxpls3DR}
+\alias{coxpls3DR.default}
+\alias{coxpls3DR.formula}
 \title{Fitting a PLSR model on the (Deviance) Residuals}
 \description{
 This function computes the PLSR model with the Residuals of a Cox-Model fitted with an intercept as the only explanatory variable as the response and Xplan as explanatory variables. Default behaviour uses the Deviance residuals. It uses the package \code{plsRglm}.
 }
 \usage{
-coxplsDR2(Xplan, \dots)
-\method{coxplsDR2}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE,sparse=FALSE,sparseStop=TRUE, ...)
-\method{coxplsDR2}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE, ...)
+coxpls3DR(Xplan, \dots)
+\method{coxpls3DR}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE,sparse=FALSE,sparseStop=TRUE, ...)
+\method{coxpls3DR}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE, ...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -34,7 +34,7 @@ coxplsDR2(Xplan, \dots)
   }
   \item{plot}{Should the survival function be plotted ?)}
   \item{allres}{FALSE to return only the Cox model and TRUE for additionnal results. See details. Defaults to FALSE.}
-  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxplsDR2} is called.}  
+  \item{dataXplan}{an optional data frame, list or environment (or object coercible by \code{\link{as.data.frame}} to a data frame) containing the variables in the model. If not found in \code{dataXplan}, the variables are taken from \code{environment(Xplan)}, typically the environment from which \code{coxpls3DR} is called.}  
   \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process.}
   \item{weights}{an optional vector of 'prior weights' to be used in the fitting process. Should be \code{NULL} or a numeric vector.}
   \item{model_frame}{If \code{TRUE}, the model frame is returned.}
@@ -48,11 +48,11 @@ If \code{allres=TRUE} returns a list with the PLS components, the final Cox-mode
 \code{allres=TRUE} is useful for evluating model prediction accuracy on a test sample.
 }
 \value{If \code{allres=FALSE} : 
-\item{cox_plsDR2}{Final Cox-model.}
+\item{cox_pls3DR}{Final Cox-model.}
 If \code{allres=TRUE} :
-\item{tt_plsDR2}{PLSR components.}
-\item{cox_plsDR2}{Final Cox-model.}
-\item{plsDR2_mod}{The PLSR model.}
+\item{tt_pls3DR}{PLSR components.}
+\item{cox_pls3DR}{Final Cox-model.}
+\item{pls3DR_mod}{The PLSR model.}
 }
 \references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
 \author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
@@ -69,13 +69,13 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_plsDR2_fit <- coxplsDR2(X_train_micro,Y_train_micro,C_train_micro,nt=7))
-(cox_plsDR2_fit2 <- coxplsDR2(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
-(cox_plsDR2_fit3 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=X_train_micro_df))
-(cox_plsDR2_fit4 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
-(cox_plsDR2_fit5 <- coxplsDR2(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
+(cox_pls3DR_fit <- coxpls3DR(X_train_micro,Y_train_micro,C_train_micro,nt=7))
+(cox_pls3DR_fit2 <- coxpls3DR(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
+(cox_pls3DR_fit3 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=X_train_micro_df))
+(cox_pls3DR_fit4 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
+(cox_pls3DR_fit5 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
 
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_plsDR2_fit,cox_plsDR2_fit2,cox_plsDR2_fit3,cox_plsDR2_fit4,cox_plsDR2_fit5)
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls3DR_fit,cox_pls3DR_fit2,cox_pls3DR_fit3,cox_pls3DR_fit4,cox_pls3DR_fit5)
 
 }
 \keyword{models}

@@ -56,6 +56,7 @@ If \code{allres=TRUE} :
 }
 \seealso{\code{\link[survival]{coxph}}, \code{\link[lars]{lars}}}
 \examples{
+\donttest{
 data(micro.censure)
 data(Xmicro.censure_compl_imp)
 
@@ -73,6 +74,7 @@ larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FAL
 larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,allres=TRUE)
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_larsDR_fit)
+}
 }
 \keyword{models}
 \keyword{regression}

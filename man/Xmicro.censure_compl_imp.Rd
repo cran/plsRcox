@@ -53,10 +53,12 @@ This dataset provides imputed microsat specifications. Imputations were computed
 \source{Allelotyping identification of genomic alterations in rectal chromosomally unstable tumors without preoperative treatment, \enc{Benoît}{Beno\^it} Romain, \enc{Agnès}{Agn\`es} Neuville, Nicolas Meyer, \enc{Cécile}{C\'ecile} Brigand, Serge Rohr, Anne Schneider, Marie-Pierre Gaub and Dominique Guenot, \emph{BMC Cancer 2010}, 10:561, doi:10.1186/1471-2407-10-561.}
 \references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
 \examples{
+\donttest{
 data(Xmicro.censure_compl_imp)
 X_train_micro <- Xmicro.censure_compl_imp[1:80,]
 X_test_micro <- Xmicro.censure_compl_imp[81:117,]
 rm(X_train_micro,X_test_micro)
+}
 }
 \keyword{datasets}
 
