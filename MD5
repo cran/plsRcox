@@ -1,4 +1,4 @@
-e223765879063285036b52bd330b7f03 *DESCRIPTION
+1eb017c4fe9fa1b39c383a574b637cde *DESCRIPTION
 a464e62cc1c69a9b8203fa0e932eb5be *NAMESPACE
 eb27df2877c4cb85665cc16213b53cd4 *NEWS
 d00eef2dd06c6212b415c3fd2dffbf2f *R/DKplsRcox.R
@@ -42,7 +42,7 @@ e73f9816c406268a175a6486bc8d71fc *R/larsDR_coxph.R
 bde9c2c92092f3382fdf69d6021a4052 *R/plsRcox.R
 6424e0b89b66bd9e24aff4e2a3abf7ee *R/plsRcoxmodel.default.R
 824362375a3e66948a8a5f4328780821 *R/plsRcoxmodel.formula.R
-0497cbc5fdafab39ca59605dd58ceafa *R/predict.plsRcoxmodel.R
+25e9a0d20ba0ebbd7804179ba4cfbd86 *R/predict.plsRcoxmodel.R
 0f8b1a2c5439b7eda6012ce48967cf41 *R/print.plsRcoxmodel.R
 1a284dc7f872df8f0787026e8f1f1569 *R/print.summary.plsRcoxmodel.R
 3ac4212f683c7f4087fad2451ab355fc *R/summary.plsRcoxmodel.R
@@ -57,7 +57,7 @@ bda7bdf46bb4e01fb7c6d9cfb2963923 *man/coxDKplsDR.Rd
 8e35890b325538d444912bc35d3341cc *man/coxpls.Rd
 2e5476299f8dad42e18ce3ec9b0ba067 *man/coxpls2.Rd
 0df77b542ab37f069cbd9cd55997567a *man/coxpls2DR.Rd
-e45c38fe466d5a7ad5e990a34efad1cb *man/coxpls3.Rd
+ea865fbe852772b6ce6c5aa3398facce *man/coxpls3.Rd
 b705757c5135451252753f98c288f58e *man/coxpls3DR.Rd
 086f0e7ae68ad2ad2556777bebd3c3ed *man/coxplsDR.Rd
 5c6932dc0066310049e523b5f49e41ad *man/coxsplsDR.Rd
