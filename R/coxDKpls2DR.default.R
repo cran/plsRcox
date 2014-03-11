@@ -2,9 +2,9 @@ coxDKpls2DR.default <- function(Xplan,time,time2,event,type,origin,typeres="devi
 try(attachNamespace("survival"),silent=TRUE)
 on.exit(try(unloadNamespace("survival"),silent=TRUE))
 try(attachNamespace("pls"),silent=TRUE)
-on.exit(try(detach(package:pls),silent=TRUE),add=TRUE)
+on.exit(try(unloadNamespace("pls"),silent=TRUE),add=TRUE)
 try(attachNamespace("kernlab"),silent=TRUE)
-on.exit(try(detach(package:kernlab),silent=TRUE),add=TRUE)
+on.exit(try(unloadNamespace("kernlab"),silent=TRUE),add=TRUE)
 
 
 if(scaleX){Xplan <- as.data.frame(scale(Xplan))} else {Xplan <- as.data.frame(Xplan)}
@@ -70,7 +70,7 @@ mf3$data <- Xplan_kernDKpls2DR_mod
 mf3$method<-methodpls
 mf3[[1L]] <- as.name("plsr")
 DKpls2DR_mod <- eval(mf3, parent.frame())
-tt_DKpls2DR <- data.frame(pls::scores(DKpls2DR_mod)[,])
+tt_DKpls2DR <- data.frame(scores(DKpls2DR_mod)[,])
 
 mf2b <- match.call(expand.dots = TRUE)
 m2b <- match(c(head(names(as.list(args(coxph))),-2),head(names(as.list(args(coxph.control))),-1)), names(mf2b), 0L)

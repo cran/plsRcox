@@ -5,7 +5,9 @@
 This function provides a predict method for the class \code{"plsRcoxmodel"}
 }
 \usage{
-\method{predict}{plsRcoxmodel}(object,newdata,comps=object$computed_nt,type=c("lp", "risk", "expected", "terms", "scores"),se.fit=FALSE,weights,methodNA="adaptative",...)
+\method{predict}{plsRcoxmodel}(object,newdata,comps=object$computed_nt,
+type=c("lp", "risk", "expected", "terms", "scores"),se.fit=FALSE,
+weights,methodNA="adaptative",...)
 }
 \arguments{
   \item{object}{An object of the class \code{"plsRcoxmodel"}.}
@@ -21,9 +23,9 @@ This function provides a predict method for the class \code{"plsRcoxmodel"}
 When type is "\code{response}", a matrix of predicted response values is returned.\cr
 When type is "\code{scores}", a score matrix is returned. 
 }
-\references{\enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand et Nicolas Meyer (2011). \enc{Régression}{R\'egression} \enc{Bêta}{B\^eta} PLS. \emph{Preprint}.
+\references{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand et Nicolas Meyer (2011). \enc{R?gression}{R\'egression} \enc{B?ta}{B\^eta} PLS. \emph{Preprint}.
 }
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }

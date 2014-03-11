@@ -1,5 +1,6 @@
 This file documents software changes.
 
+0.9.9 Code enhancement for big datasets
 0.9.0 New wrappers for (s)pls-based functions
 0.8.0 Multivariate method choice for pls based algorithms
 0.7.6 Minor fixes

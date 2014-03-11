@@ -3,8 +3,8 @@ if(scaleX){Xplan <- as.data.frame(scale(Xplan))} else {Xplan <- as.data.frame(Xp
 if((scaleY & missing(time2))){time <- scale(time)}
 try(attachNamespace("survival"),silent=TRUE)
 on.exit(try(unloadNamespace("survival"),silent=TRUE))
-library(pls)
-on.exit(try(detach(package:pls),silent=TRUE),add=TRUE)
+try(attachNamespace("pls"),silent=TRUE)
+on.exit(try(unloadNamespace("pls"),silent=TRUE),add=TRUE)
 
 mf <- match.call(expand.dots = FALSE)
 m <- match(c("time", "time2", "event", "type", "origin"), names(mf), 0L)
@@ -20,7 +20,7 @@ mf2$data <- Xplan
 mf2$method <- methodpls
 mf2[[1L]] <- as.name("plsr")
 pls_mod <- eval(mf2, parent.frame())
-tt_pls <- data.frame(pls::scores(pls_mod)[,])
+tt_pls <- data.frame(scores(pls_mod)[,])
 
 mf2b <- match.call(expand.dots = TRUE)
 m2b <- match(c(head(names(as.list(args(coxph))),-2),head(names(as.list(args(coxph.control))),-1)), names(mf2b), 0L)

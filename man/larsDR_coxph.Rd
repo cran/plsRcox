@@ -8,8 +8,15 @@ This function computes the LASSO/LARS model with the Residuals of a Cox-Model fi
 }
 \usage{
 larsDR_coxph(Xplan, \dots)
-\method{larsDR_coxph}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, use.Gram, allres = FALSE, ...)
-\method{larsDR_coxph}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, use.Gram, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE,model_matrix=FALSE, ...)
+\method{larsDR_coxph}{default}(Xplan, time, time2, event, type, 
+origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, 
+scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, 
+use.Gram, allres = FALSE, ...)
+\method{larsDR_coxph}{formula}(Xplan, time, time2, event, type, 
+origin, typeres = "deviance", collapse, weighted, scaleX = FALSE, 
+scaleY = TRUE, plot = FALSE, typelars, normalize, max.steps, 
+use.Gram, allres = FALSE, dataXplan = NULL, subset, weights,
+model_frame=FALSE,model_matrix=FALSE, ...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -49,8 +56,8 @@ If \code{allres=TRUE} :
 \item{X_larsDR}{The eXplanatory variables.}
 \item{cox_larsDR}{Final Cox-model.}
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\references{plsRcox : \enc{mod?les}{mod\`eles} de Cox en \enc{pr?sence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiom?trie}{Chimiom\'etrie} 2010, Paris, 2010.}
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
@@ -65,13 +72,17 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_larsDR_fit <- larsDR_coxph(X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE))
-(cox_larsDR_fit <- larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE))
-(cox_larsDR_fit <- larsDR_coxph(~.,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,dataXplan=X_train_micro_df))
+(cox_larsDR_fit <- larsDR_coxph(X_train_micro,Y_train_micro,C_train_micro,max.steps=6,
+use.Gram=FALSE,scaleX=TRUE))
+(cox_larsDR_fit <- larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,
+use.Gram=FALSE,scaleX=TRUE))
+(cox_larsDR_fit <- larsDR_coxph(~.,Y_train_micro,C_train_micro,max.steps=6,
+use.Gram=FALSE,scaleX=TRUE,dataXplan=X_train_micro_df))
 
 larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE)
 larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=FALSE)
-larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,scaleX=TRUE,allres=TRUE)
+larsDR_coxph(~X_train_micro,Y_train_micro,C_train_micro,max.steps=6,use.Gram=FALSE,
+scaleX=TRUE,allres=TRUE)
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_larsDR_fit)
 }

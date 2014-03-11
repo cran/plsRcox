@@ -8,8 +8,15 @@ This function computes the sPLSR model with the Residuals of a Cox-Model fitted 
 }
 \usage{
 coxsplsDR(Xplan, \dots)
-\method{coxsplsDR}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot = FALSE, allres = FALSE, eta, trace=FALSE,...)
-\method{coxsplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE,eta, trace=FALSE,...)
+\method{coxsplsDR}{default}(Xplan, time, time2, event, type, 
+origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, 
+scaleY = TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", 
+plot = FALSE, allres = FALSE, eta, trace=FALSE,...)
+\method{coxsplsDR}{formula}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted, scaleX=TRUE, 
+scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", 
+plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,
+model_frame=FALSE,eta, trace=FALSE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -47,8 +54,8 @@ If \code{allres=TRUE} :
 \item{cox_splsDR}{Final Cox-model.}
 \item{splsDR_mod}{The sPLSR model.}
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\references{plsRcox : \enc{mod?les}{mod\`eles} de Cox en \enc{pr?sence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiom?trie}{Chimiom\'etrie} 2010, Paris, 2010.}
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
@@ -64,8 +71,9 @@ C_train_micro <- micro.censure$DC[1:80]
 
 (cox_splsDR_fit=coxsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,eta=.5))
 (cox_splsDR_fit2=coxsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,eta=.5,trace=TRUE))
-(cox_splsDR_fit3=coxsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,dataXplan=X_train_micro_df,eta=.5))
-                                                                                                         
+(cox_splsDR_fit3=coxsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,
+dataXplan=X_train_micro_df,eta=.5))
+
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_splsDR_fit,cox_splsDR_fit2,cox_splsDR_fit3)
 }
 \keyword{models}

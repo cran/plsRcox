@@ -8,8 +8,19 @@ This function implements Partial least squares Regression generalized linear mod
 }
 \usage{
 plsRcox(Xplan, \dots)
-\method{plsRcoxmodel}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, nt=min(2,ncol(Xplan)),limQ2set=.0975, dataPredictY=Xplan, pvals.expli=FALSE,alpha.pvals.expli=.05,tol_Xi=10^(-12),weights,control, sparse=FALSE,sparseStop=TRUE,allres=TRUE,...)
-\method{plsRcoxmodel}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted,scaleX=TRUE,scaleY=NULL,dataXplan=NULL, nt=min(2,ncol(Xplan)),limQ2set=.0975, dataPredictY=Xplan, pvals.expli=FALSE, model_frame=FALSE, alpha.pvals.expli=.05,tol_Xi=10^(-12),weights,subset,control,sparse=FALSE,sparseStop=TRUE,allres=TRUE,...)
+\method{plsRcoxmodel}{default}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted, scaleX=TRUE, 
+scaleY=TRUE, nt=min(2,ncol(Xplan)),limQ2set=.0975, 
+dataPredictY=Xplan, pvals.expli=FALSE,alpha.pvals.expli=.05,
+tol_Xi=10^(-12),weights,control, sparse=FALSE,
+sparseStop=TRUE,allres=TRUE,...)
+\method{plsRcoxmodel}{formula}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted,scaleX=TRUE,
+scaleY=NULL,dataXplan=NULL, nt=min(2,ncol(Xplan)),
+limQ2set=.0975, dataPredictY=Xplan, pvals.expli=FALSE, 
+model_frame=FALSE, alpha.pvals.expli=.05,tol_Xi=10^(-12),
+weights,subset,control,sparse=FALSE,sparseStop=TRUE,
+allres=TRUE,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -53,9 +64,9 @@ Non-NULL weights can be used to indicate that different observations have differ
 \value{
 Depends on the model that was used to fit the model.
 }
-\references{\enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand et Nicolas Meyer (2011). \enc{Régression}{R\'egression} \enc{Bêta}{B\^eta} PLS. \emph{Preprint}.
+\references{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand et Nicolas Meyer (2011). \enc{R?gression}{R\'egression} \enc{B?ta}{B\^eta} PLS. \emph{Preprint}.
 }
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
@@ -76,8 +87,10 @@ C_train_micro <- micro.censure$DC[1:80]
 plsRcox(X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5)$InfCrit
 plsRcox(~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5)$InfCrit
 
-plsRcox(Xplan=X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,alpha.pvals.expli=.15)$InfCrit
-plsRcox(Xplan=~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,alpha.pvals.expli=.15)$InfCrit
+plsRcox(Xplan=X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,
+alpha.pvals.expli=.15)$InfCrit
+plsRcox(Xplan=~X_train_micro,time=Y_train_micro,event=C_train_micro,nt=5,sparse=TRUE,
+alpha.pvals.expli=.15)$InfCrit
 }
 }\keyword{models}
 \keyword{regression}

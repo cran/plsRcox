@@ -8,8 +8,17 @@ This function computes the Direct Kernel sPLSR model with the Residuals of a Cox
 }
 \usage{
 coxDKsplsDR(Xplan, \dots)
-\method{coxDKsplsDR}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE, eta, trace=FALSE, kernel="rbfdot",hyperkernel,...)
-\method{coxDKsplsDR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE, eta, trace=FALSE, kernel="rbfdot",hyperkernel,...)
+\method{coxDKsplsDR}{default}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted, scaleX=TRUE, 
+scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", 
+plot=FALSE, allres=FALSE, eta, trace=FALSE, kernel="rbfdot",
+hyperkernel,...)
+\method{coxDKsplsDR}{formula}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted, scaleX=TRUE, 
+scaleY=TRUE, ncomp=min(7,ncol(Xplan)), modepls="regression", 
+plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,
+model_frame=FALSE, eta, trace=FALSE, kernel="rbfdot",
+hyperkernel,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -68,8 +77,8 @@ If \code{allres=TRUE} :
 \item{cox_DKsplsDR}{Final Cox-model.}
 \item{DKsplsDR_mod}{The sPLSR model.}
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\references{plsRcox : \enc{mod?les}{mod\`eles} de Cox en \enc{pr?sence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiom?trie}{Chimiom\'etrie} 2010, Paris, 2010.}
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
@@ -83,13 +92,19 @@ X_train_micro_df <- data.frame(X_train_micro)
 Y_train_micro <- micro.censure$survyear[1:80]
 C_train_micro <- micro.censure$DC[1:80]
 
-(cox_DKsplsDR_fit=coxDKsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",eta=.5))
-(cox_DKsplsDR_fit=coxDKsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",eta=.5))
-(cox_DKsplsDR_fit=coxDKsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=data.frame(X_train_micro),eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",dataXplan=data.frame(X_train_micro),eta=.5))
 
-(cox_DKsplsDR_fit=coxDKsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,eta=.5))
-(cox_DKsplsDR_fit=coxDKsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,eta=.5))
-(cox_DKsplsDR_fit=coxDKsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=data.frame(X_train_micro),eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",allres=TRUE,eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",allres=TRUE,eta=.5))
+(cox_DKsplsDR_fit=coxDKsplsDR(~.,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",allres=TRUE,dataXplan=data.frame(X_train_micro),eta=.5))
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKsplsDR_fit)
 }

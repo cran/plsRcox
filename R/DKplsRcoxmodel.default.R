@@ -5,8 +5,8 @@ dataY<-time
 
 try(attachNamespace("survival"),silent=TRUE)
 on.exit(try(unloadNamespace("survival"),silent=TRUE))
-library(kernlab)
-on.exit(try(detach(package:kernlab),silent=TRUE),add=TRUE)
+try(attachNamespace("kernlab"),silent=TRUE)
+on.exit(try(unloadNamespace("kernlab"),silent=TRUE),add=TRUE)
 
 if(missing(weights)){NoWeights=TRUE} else {if(all(weights==rep(1,length(dataY)))){NoWeights=TRUE} else {NoWeights=FALSE}}
 

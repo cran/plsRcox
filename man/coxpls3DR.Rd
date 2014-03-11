@@ -8,8 +8,15 @@ This function computes the PLSR model with the Residuals of a Cox-Model fitted w
 }
 \usage{
 coxpls3DR(Xplan, \dots)
-\method{coxpls3DR}{default}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE,sparse=FALSE,sparseStop=TRUE, ...)
-\method{coxpls3DR}{formula}(Xplan, time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", plot = FALSE, allres = FALSE, dataXplan = NULL, subset, weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE, ...)
+\method{coxpls3DR}{default}(Xplan, time, time2, event, type, 
+origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, 
+scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", 
+plot = FALSE, allres = FALSE,sparse=FALSE,sparseStop=TRUE, ...)
+\method{coxpls3DR}{formula}(Xplan, time, time2, event, type, 
+origin, typeres = "deviance", collapse, weighted, scaleX = TRUE, 
+scaleY = TRUE, nt=min(7,ncol(Xplan)), typeVC="none", 
+plot = FALSE, allres = FALSE, dataXplan = NULL, subset, 
+weights,model_frame=FALSE,sparse=FALSE,sparseStop=TRUE, ...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -54,8 +61,8 @@ If \code{allres=TRUE} :
 \item{cox_pls3DR}{Final Cox-model.}
 \item{pls3DR_mod}{The PLSR model.}
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\references{plsRcox : \enc{mod?les}{mod\`eles} de Cox en \enc{pr?sence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiom?trie}{Chimiom\'etrie} 2010, Paris, 2010.}
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
@@ -72,10 +79,13 @@ C_train_micro <- micro.censure$DC[1:80]
 (cox_pls3DR_fit <- coxpls3DR(X_train_micro,Y_train_micro,C_train_micro,nt=7))
 (cox_pls3DR_fit2 <- coxpls3DR(~X_train_micro,Y_train_micro,C_train_micro,nt=7))
 (cox_pls3DR_fit3 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,dataXplan=X_train_micro_df))
-(cox_pls3DR_fit4 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE))
-(cox_pls3DR_fit5 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
+(cox_pls3DR_fit4 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",
+data=X_train_micro_df,sparse=TRUE))
+(cox_pls3DR_fit5 <- coxpls3DR(~.,Y_train_micro,C_train_micro,nt=7,typeVC="none",
+data=X_train_micro_df,sparse=TRUE,sparseStop=FALSE))
 
-rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls3DR_fit,cox_pls3DR_fit2,cox_pls3DR_fit3,cox_pls3DR_fit4,cox_pls3DR_fit5)
+rm(X_train_micro,Y_train_micro,C_train_micro,cox_pls3DR_fit,cox_pls3DR_fit2,
+cox_pls3DR_fit3,cox_pls3DR_fit4,cox_pls3DR_fit5)
 
 }
 \keyword{models}

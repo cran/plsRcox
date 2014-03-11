@@ -8,8 +8,16 @@ This function computes the Direct Kernel PLSR model with the Residuals of a Cox-
 }
 \usage{
 coxDKpls2DR(Xplan, \dots)
-\method{coxDKpls2DR}{default}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", validation = "CV", plot=FALSE, allres=FALSE, kernel="rbfdot",hyperkernel,...)
-\method{coxDKpls2DR}{formula}(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,subset,weights,model_frame=FALSE, kernel="rbfdot",hyperkernel,...)
+\method{coxDKpls2DR}{default}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted, scaleX=TRUE, 
+scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", 
+validation = "CV", plot=FALSE, allres=FALSE, kernel="rbfdot",
+hyperkernel,...)
+\method{coxDKpls2DR}{formula}(Xplan,time,time2,event,type,
+origin,typeres="deviance", collapse, weighted, scaleX=TRUE, 
+scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", 
+validation = "CV", plot=FALSE, allres=FALSE,dataXplan=NULL,
+subset,weights,model_frame=FALSE, kernel="rbfdot",hyperkernel,...)
 }
 \arguments{
   \item{Xplan}{a formula or a matrix with the eXplanatory variables (training) dataset}
@@ -67,8 +75,8 @@ If \code{allres=TRUE} :
 \item{cox_DKpls2DR}{Final Cox-model.}
 \item{DKpls2DR_mod}{The PLSR model.}
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\references{plsRcox : \enc{mod?les}{mod\`eles} de Cox en \enc{pr?sence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiom?trie}{Chimiom\'etrie} 2010, Paris, 2010.}
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }
@@ -85,26 +93,31 @@ C_train_micro <- micro.censure$DC[1:80]
 (cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
 
 #Fixing sigma to compare with pls2DR on Gram matrix; should be identical
-(cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",hyperkernel=list(sigma=0.01292786)))
+(cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",hyperkernel=list(sigma=0.01292786)))
 
-library(kernlab)
-X_train_micro_kern <- kernelMatrix(rbfdot(sigma=0.01292786),scale(X_train_micro))
-(cox_DKpls2DR_fit2=coxpls2DR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,validation="CV",scaleX=FALSE))
-detach(package:kernlab)
+X_train_micro_kern <- kernlab::kernelMatrix(kernlab::rbfdot(sigma=0.01292786),scale(X_train_micro))
+(cox_DKpls2DR_fit2=coxpls2DR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",scaleX=FALSE))
 
-(cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",kernel="laplacedot",hyperkernel=list(sigma=0.01292786)))
+(cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",kernel="laplacedot",hyperkernel=list(sigma=0.01292786)))
 
-library(kernlab)
-X_train_micro_kern <- kernelMatrix(laplacedot(sigma=0.01292786),scale(X_train_micro))
-(cox_DKpls2DR_fit2=coxpls2DR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,validation="CV",scaleX=FALSE))
-detach(package:kernlab)
+X_train_micro_kern <- kernlab::kernelMatrix(kernlab::laplacedot(sigma=0.01292786),
+scale(X_train_micro))
+(cox_DKpls2DR_fit2=coxpls2DR(~X_train_micro_kern,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",scaleX=FALSE))
 
 (cox_DKpls2DR_fit=coxDKpls2DR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV"))
-(cox_DKpls2DR_fit=coxDKpls2DR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",dataXplan=X_train_micro_df))
+(cox_DKpls2DR_fit=coxDKpls2DR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",
+dataXplan=X_train_micro_df))
 
-(cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-(cox_DKpls2DR_fit=coxDKpls2DR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE))
-(cox_DKpls2DR_fit=coxDKpls2DR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",allres=TRUE,dataXplan=X_train_micro_df))
+(cox_DKpls2DR_fit=coxDKpls2DR(X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",allres=TRUE))
+(cox_DKpls2DR_fit=coxDKpls2DR(~X_train_micro,Y_train_micro,C_train_micro,ncomp=6,
+validation="CV",allres=TRUE))
+(cox_DKpls2DR_fit=coxDKpls2DR(~.,Y_train_micro,C_train_micro,ncomp=6,validation="CV",
+allres=TRUE,dataXplan=X_train_micro_df))
 
 
 rm(X_train_micro,Y_train_micro,C_train_micro,cox_DKpls2DR_fit)

@@ -1,8 +1,8 @@
 larsDR_coxph.default <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=FALSE, scaleY=TRUE, plot=FALSE, typelars="lasso", normalize = TRUE, max.steps, use.Gram = TRUE, allres=FALSE,...){
 try(attachNamespace("survival"),silent=TRUE)
 on.exit(try(unloadNamespace("survival"),silent=TRUE))
-library(lars)
-on.exit(try(detach(package:lars),silent=TRUE),add=TRUE)
+try(attachNamespace("lars"),silent=TRUE)
+on.exit(try(unloadNamespace("lars"),silent=TRUE),add=TRUE)
 
 if(!is.matrix(Xplan)){Xplan <- as.matrix(Xplan);cat("scales\n")}
 if(scaleX){Xplan <- scale(Xplan)}
@@ -15,7 +15,7 @@ mf <- mf[c(1L, m)]
 mf[[1L]] <- as.name("Surv")
 YCsurv <- eval(mf, parent.frame())
 
-if(plot){plot(survival::survfit(YCsurv~1))}
+if(plot){plot(survfit(YCsurv~1))}
 
 mf1 <- match.call(expand.dots = TRUE)
 m1 <- match(c(head(names(as.list(args(coxph))),-2),head(names(as.list(args(coxph.control))),-1)), names(mf1), 0L)

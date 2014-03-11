@@ -5,7 +5,8 @@
 This function computes the Residuals for a Cox-Model fitted with an intercept as the only explanatory variable. Default behaviour gives the Deviance residuals.
 }
 \usage{
-DR_coxph(time, time2, event, type, origin, typeres = "deviance", collapse, weighted, scaleY = TRUE, plot = FALSE, ...)
+DR_coxph(time, time2, event, type, origin, typeres = "deviance",
+collapse, weighted, scaleY = TRUE, plot = FALSE, ...)
 }
 \arguments{
   \item{time}{for right censored data, this is the follow up time. For interval data, the first argument is the starting time for the interval.}
@@ -22,8 +23,8 @@ DR_coxph(time, time2, event, type, origin, typeres = "deviance", collapse, weigh
 }
 \value{\item{Named num}{Vector of the residual values.}
 }
-\references{plsRcox : \enc{modèles}{mod\`eles} de Cox en \enc{présence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Frédéric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiométrie}{Chimiom\'etrie} 2010, Paris, 2010.}
-\author{\enc{Frédéric}{Fr\'ed\'eric} Bertrand\cr
+\references{plsRcox : \enc{mod?les}{mod\`eles} de Cox en \enc{pr?sence}{pr\'esence} d'un grand nombre de variables explicatives, \enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand, Myriam Maumy-Bertrand, Marie-Pierre Gaub, Nicolas Meyer, \enc{Chimiom?trie}{Chimiom\'etrie} 2010, Paris, 2010.}
+\author{\enc{Fr?d?ric}{Fr\'ed\'eric} Bertrand\cr
 \email{frederic.bertrand@math.unistra.fr}\cr
 \url{http://www-irma.u-strasbg.fr/~fbertran/}
 }

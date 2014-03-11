@@ -1,11 +1,10 @@
 coxpls2DR.default <- function(Xplan,time,time2,event,type,origin,typeres="deviance", collapse, weighted, scaleX=TRUE, scaleY=TRUE, ncomp=min(7,ncol(Xplan)), methodpls="kernelpls", validation = "CV", plot=FALSE, allres=FALSE,...) {
-library(pls)
 if(scaleX){Xplan <- as.data.frame(scale(Xplan))} else {Xplan <- as.data.frame(Xplan)}
 if((scaleY & missing(time2))){time <- scale(time)}
 try(attachNamespace("survival"),silent=TRUE)
 on.exit(try(unloadNamespace("survival"),silent=TRUE))
-library(pls)
-on.exit(try(detach(package:pls),silent=TRUE),add=TRUE)
+try(attachNamespace("pls"),silent=TRUE)
+on.exit(try(unloadNamespace("pls"),silent=TRUE),add=TRUE)
 
 
 mf <- match.call(expand.dots = FALSE)
@@ -37,7 +36,7 @@ mf3$data <- Xplan
 mf3$method <- methodpls
 mf3[[1L]] <- as.name("plsr")
 pls2DR_mod <- eval(mf3, parent.frame())
-tt_pls2DR <- data.frame(pls::scores(pls2DR_mod)[,])
+tt_pls2DR <- data.frame(scores(pls2DR_mod)[,])
 
 mf2b <- match.call(expand.dots = TRUE)
 m2b <- match(c(head(names(as.list(args(coxph))),-2),head(names(as.list(args(coxph.control))),-1)), names(mf2b), 0L)
