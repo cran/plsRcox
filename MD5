@@ -1,6 +1,6 @@
-231d6653a8ea12881ae95d162eb6a022 *DESCRIPTION
+576ed7c27e2123ce0e6e635cebd028d6 *DESCRIPTION
 d314889cab9c690b0c9bda1a9ccee4c5 *NAMESPACE
-b28f86bdd9f8ad2e65f0499a2c29a464 *NEWS
+bca1170a4c6d0beba78ab5f49886ef0b *NEWS
 c2c8a94c21f8f916395741a2c01806f6 *R/DKplsRcox.R
 e0d8fb54b8ada4f95d5dcc5554a893de *R/DKplsRcoxmodel.default.R
 3948b81ef64c047c2f6623bc125c717d *R/DKplsRcoxmodel.formula.R
@@ -41,7 +41,7 @@ ac7c33836fd22a3ff27b3f74e488cb98 *R/cv.coxDKsplsDR.R
 282edb4eb3d3b6be6168ec5aee56329e *R/cv.coxpls.R
 bbef06043b2c89684713824b13a62395 *R/cv.coxplsDR.R
 87fe4032a766be7e5a42d489a2954d1e *R/cv.coxsplsDR.R
-6a9b0c39d1ac60eb6292bd6b703d2b7e *R/cv.larsDR.R
+91cd1d9a07f0ed1de1133833433923d6 *R/cv.larsDR.R
 f46bf626a6292ee4f584572430614e32 *R/cv.plsRcox.R
 8267eb999471e3f712ca9e84cc33c4f2 *R/internal-plsRcox.R
 e73f9816c406268a175a6486bc8d71fc *R/larsDR_coxph.R
@@ -72,11 +72,11 @@ b705757c5135451252753f98c288f58e *man/coxpls3DR.Rd
 9fd08f2331f50764a82e94ba7f761831 *man/coxsplsDR.Rd
 eb15347734f7f8025a96e50f55a902f9 *man/cv.autoplsRcox.Rd
 3f5dede7d84f1a13e13f08eb40139e5a *man/cv.coxDKplsDR.Rd
-54ff7faa07ed81db50b66536fd6c6397 *man/cv.coxDKsplsDR.Rd
+c7784c88dba87ec3561f5f558b01a3e4 *man/cv.coxDKsplsDR.Rd
 96ef5c90c9bb9aa65e3ce6a8c45fb7a9 *man/cv.coxpls.Rd
 51e73b6cf7c35d7423559fae3bed57d0 *man/cv.coxplsDR.Rd
 1a31c747d9b77295e21923a17f399067 *man/cv.coxsplsDR.Rd
-3add137b0198b19d91bd2e5b1d3fc973 *man/cv.larsDR.Rd
+54cc099446394763f52d36b4255ef083 *man/cv.larsDR.Rd
 6026bf1d48ae26c4afbd337511bb575c *man/cv.plsRcox.Rd
 2939e729c02877cf106c278fa46a7a50 *man/internal-plsRcox.Rd
 fa927d3fa83a1faa16e25527299184ad *man/larsDR_coxph.Rd
