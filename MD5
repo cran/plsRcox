@@ -1,6 +1,6 @@
-576ed7c27e2123ce0e6e635cebd028d6 *DESCRIPTION
-d314889cab9c690b0c9bda1a9ccee4c5 *NAMESPACE
-bca1170a4c6d0beba78ab5f49886ef0b *NEWS
+9319011b112cd15ab7ae3f3978e1c66d *DESCRIPTION
+5639567c0aebfa2cbca29aad35520837 *NAMESPACE
+4c6d192146eb80d04a1d253b76f587ee *NEWS
 c2c8a94c21f8f916395741a2c01806f6 *R/DKplsRcox.R
 e0d8fb54b8ada4f95d5dcc5554a893de *R/DKplsRcoxmodel.default.R
 3948b81ef64c047c2f6623bc125c717d *R/DKplsRcoxmodel.formula.R
@@ -56,8 +56,8 @@ bde9c2c92092f3382fdf69d6021a4052 *R/plsRcox.R
 3ac4212f683c7f4087fad2451ab355fc *R/summary.plsRcoxmodel.R
 b4eddfbea9627013dad640b8a898f5b7 *data/Xmicro.censure_compl_imp.RData
 ceda0f3a57c3e64dc8496de4e64af787 *data/micro.censure.RData
-5c26d6ca21eb66f533d93948d0f4f749 *inst/CITATION
-b28eaf8783a628c742725c24d640a1c2 *man/DKplsRcox.Rd
+0036b2dd196b1d4571890190b9ace684 *inst/CITATION
+6eed5561537e420274548938d84d6e1a *man/DKplsRcox.Rd
 02b97908c7198ab7cd50f84a8ef653ad *man/DR_coxph.Rd
 699a346b255d5e1ba57d7c88d3b1bc32 *man/Xmicro.censure_compl_imp.Rd
 322662520ca290a72c251d7021fa93ab *man/coxDKpls2DR.Rd
