@@ -1,5 +1,5 @@
-9319011b112cd15ab7ae3f3978e1c66d *DESCRIPTION
-5639567c0aebfa2cbca29aad35520837 *NAMESPACE
+9eec3e3e9ac799d41b8e532dd92812f7 *DESCRIPTION
+1d946651d829e469d3c723f24b5f9226 *NAMESPACE
 4c6d192146eb80d04a1d253b76f587ee *NEWS
 c2c8a94c21f8f916395741a2c01806f6 *R/DKplsRcox.R
 e0d8fb54b8ada4f95d5dcc5554a893de *R/DKplsRcoxmodel.default.R
@@ -47,15 +47,15 @@ f46bf626a6292ee4f584572430614e32 *R/cv.plsRcox.R
 e73f9816c406268a175a6486bc8d71fc *R/larsDR_coxph.R
 4fd5fcd10994665048a91cd72fc6d18a *R/larsDR_coxph.default.R
 8394a2a9962fdcbc20ae7dd045e74ab2 *R/larsDR_coxph.formula.R
-bde9c2c92092f3382fdf69d6021a4052 *R/plsRcox.R
+9586d8b70ede037c8a9e1031a38b87dc *R/plsRcox.R
 4fd98846c55eb3ef32cbc24c875dfe89 *R/plsRcoxmodel.default.R
 86f54baa6b9413b528a367cc68357d29 *R/plsRcoxmodel.formula.R
 3e7e46698a422dcd186c82ac4befa689 *R/predict.plsRcoxmodel.R
 0f8b1a2c5439b7eda6012ce48967cf41 *R/print.plsRcoxmodel.R
 1a284dc7f872df8f0787026e8f1f1569 *R/print.summary.plsRcoxmodel.R
 3ac4212f683c7f4087fad2451ab355fc *R/summary.plsRcoxmodel.R
-b4eddfbea9627013dad640b8a898f5b7 *data/Xmicro.censure_compl_imp.RData
-ceda0f3a57c3e64dc8496de4e64af787 *data/micro.censure.RData
+031c2173a17f3213cb6fb7bc9a2be991 *data/Xmicro.censure_compl_imp.RData
+5c73bd77ad954108ed0f4b3d629058b9 *data/micro.censure.RData
 0036b2dd196b1d4571890190b9ace684 *inst/CITATION
 6eed5561537e420274548938d84d6e1a *man/DKplsRcox.Rd
 02b97908c7198ab7cd50f84a8ef653ad *man/DR_coxph.Rd

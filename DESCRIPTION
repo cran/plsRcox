@@ -1,7 +1,7 @@
 Package: plsRcox
-Version: 1.7.3
+Version: 1.7.3.1
 Date: 2018-05-31
-Depends: R (>= 2.4.0)
+Depends: R (>= 2.10)
 Imports: survival, plsRglm, lars, pls, kernlab, mixOmics, risksetROC,
         survcomp, survAUC, rms
 Enhances:
@@ -20,6 +20,6 @@ Encoding: latin1
 URL: http://www-irma.u-strasbg.fr/~fbertran/
 Classification/MSC: 62N01, 62N02, 62N03, 62N99
 NeedsCompilation: no
-Packaged: 2018-06-02 09:33:35 UTC; fbertran
+Packaged: 2018-09-11 09:20:42 UTC; hornik
 Repository: CRAN
-Date/Publication: 2018-06-02 22:10:14 UTC
+Date/Publication: 2018-09-11 09:37:45 UTC
