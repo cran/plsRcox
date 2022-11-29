@@ -70,12 +70,17 @@
 #' @param model_frame If \code{TRUE}, the model frame is returned.
 #' @param eta Thresholding parameter. \code{eta} should be between 0 and 1.
 #' @param trace Print out the progress of variable selection?
+#' @param model_matrix If \code{TRUE}, the model matrix is returned.
+#' @param contrasts.arg a list, whose entries are values (numeric matrices, 
+#' functions or character strings naming functions) to be used as replacement 
+#' values for the contrasts replacement function and whose names are the names 
+#' of columns of data containing factors.
 #' @param \dots Arguments to be passed on to \code{survival::coxph}.
 #' @return If \code{allres=FALSE} : \item{cox_splsDR}{Final Cox-model.} If
 #' \code{allres=TRUE} : \item{tt_splsDR}{sPLSR components.}
 #' \item{cox_splsDR}{Final Cox-model.} \item{splsDR_mod}{The sPLSR model.}
 #' @author Frédéric Bertrand\cr
-#' \email{frederic.bertrand@@math.unistra.fr}\cr
+#' \email{frederic.bertrand@@utt.fr}\cr
 #' \url{http://www-irma.u-strasbg.fr/~fbertran/}
 #' @seealso \code{\link[survival]{coxph}}, \code{\link[pls]{plsr}}
 #' @references plsRcox, Cox-Models in a high dimensional setting in R, Frederic
