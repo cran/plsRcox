@@ -1,5 +1,5 @@
-ff9bf167b6aed0549f0e04784b768b8a *DESCRIPTION
-3c40e79bcc1c8927252772b268d26e20 *NAMESPACE
+5d432d07de06b626b6e52e639f6642a9 *DESCRIPTION
+9dd253425b90095cb3e0c0fe7bb1345c *NAMESPACE
 f516fb8131fd220af9204e736ed341e3 *R/DKplsRcox.R
 d52ec758198218cbbb7f61efbb853dca *R/DKplsRcoxmodel.default.R
 358c88cd45e41e29ec0e3cdb888ae0fd *R/DKplsRcoxmodel.formula.R
@@ -47,7 +47,7 @@ af050d78d063cdf190e88d10cff3498a *R/cv.plsRcox.R
 589ff54b4c6588defcf580587e2ea02f *R/larsDR_coxph.R
 232c07362d2de60eec4287dbdc14b912 *R/larsDR_coxph.default.R
 e1a7932252ab523a339e9ac0925d3c47 *R/larsDR_coxph.formula.R
-39c7365b78f78e6bd129ed4162a5fa96 *R/plsRcox-package.R
+d12ceced27b63eb3be9f94bb5b0869a6 *R/plsRcox-package.R
 4335f7368690cd90edc83e67859a3ed2 *R/plsRcox.R
 96f8af9cdd6286cc28da1fa6298b19ea *R/plsRcoxmodel.default.R
 fb653d4def785c9b0099db7d401c8577 *R/plsRcoxmodel.formula.R
@@ -55,8 +55,8 @@ ffb2ebf3e682dd929742c920f7462824 *R/predict.plsRcoxmodel.R
 21dae623a921d521c92a4d094336ca90 *R/print.plsRcoxmodel.R
 436613923a23e53bd033cd24287aeee5 *R/print.summary.plsRcoxmodel.R
 c77028b0155ba62a9882d14393e0402b *R/summary.plsRcoxmodel.R
-70194e73aa8641c153c73d824155f2d1 *README.md
-b52aabe9a2757fc86742763db9dafc9b *build/partial.rdb
+99559eb499afa8c9225399d3faf945f1 *README.md
+76e123f5dcc8dee07678412adc0a2a84 *build/partial.rdb
 b4eddfbea9627013dad640b8a898f5b7 *data/Xmicro.censure_compl_imp.RData
 ceda0f3a57c3e64dc8496de4e64af787 *data/micro.censure.RData
 e81d2c939a00492e24911fbe838a338d *inst/CITATION
@@ -98,7 +98,7 @@ b611b668e919d2f9e217de352d533855 *man/figures/boxplots_bioinfo.png
 daa14e07079019c825b7505360ab9c77 *man/internal-plsRcox.Rd
 e225e7e14bf48b1ff5d53dd612c6a28e *man/larsDR_coxph.Rd
 8ed5ddd6ffc4c5d411a2b87991450968 *man/micro.censure.Rd
-78219ee67a4ac3305902ef347d883fed *man/plsRcox-package.Rd
+8fa892e07eb10a0304b7165a09706f1d *man/plsRcox-package.Rd
 5da39e9fb92c02f5b237b11065766883 *man/plsRcox.Rd
 91d4c515dcf034f72c0f11a219ee0392 *man/predict.plsRcoxmodel.Rd
 38c8618cc04947306eccc4154d498b62 *man/print.plsRcoxmodel.Rd

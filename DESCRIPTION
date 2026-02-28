@@ -1,6 +1,6 @@
 Package: plsRcox
-Version: 1.8.0
-Date: 2025-09-10
+Version: 1.8.1
+Date: 2026-02-28
 Depends: R (>= 2.4.0)
 biocViews:
 Imports: survival, plsRglm, lars, pls, kernlab, mixOmics, risksetROC,
@@ -21,12 +21,12 @@ Description: Provides Partial least squares Regression and various regular, spar
 License: GPL-3
 Encoding: UTF-8
 URL: https://fbertran.github.io/plsRcox/,
-        https://github.com/fbertran/plsRcox/
-BugReports: https://github.com/fbertran/plsRcox/issues/
+        https://github.com/fbertran/plsRcox
+BugReports: https://github.com/fbertran/plsRcox/issues
 Classification/MSC: 62N01, 62N02, 62N03, 62N99
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2025-09-13 22:36:58 UTC; bertran7
+Packaged: 2026-02-28 00:00:11 UTC; bertran7
 Repository: CRAN
-Date/Publication: 2025-09-14 05:10:10 UTC
+Date/Publication: 2026-02-28 06:10:19 UTC
