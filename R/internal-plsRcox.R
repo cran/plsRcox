@@ -4,8 +4,7 @@
 #' 
 #' @description These are not to be called by the user.
 #' 
-#' @aliases getIndic getIndicCV getIndicCViAUCSH getIndicCViAUCSurvROCTest
-#' correctp.cox spls.cox ust spls.dv pls.cox predict.pls.cox
+#' @aliases getIndic getIndicCV getIndicCViAUCSH getIndicCViAUCSurvROCTest correctp.cox spls.cox ust spls.dv pls.cox predict.pls.cox
 #' @author Frédéric Bertrand\cr
 #' \email{frederic.bertrand@@lecnam.net}\cr
 #' \url{https://fbertran.github.io/homepage/}

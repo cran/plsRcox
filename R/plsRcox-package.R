@@ -51,13 +51,13 @@
 #' @import risksetROC
 #' @import survcomp
 #' @import survAUC
-#' @import rms
+#' @importFrom rms cph
 #' @importFrom grDevices dev.new
 #' @importFrom graphics abline axis layout segments
-#' @importFrom stats as.formula complete.cases contrasts 
-#' extractAIC is.empty.model median model.matrix 
-#' model.response model.weights residuals uniroot 
-#' var weighted.mean
+#' @importFrom stats as.formula complete.cases contrasts
+#'   extractAIC is.empty.model median model.matrix
+#'   model.response model.weights residuals uniroot
+#'   var weighted.mean
 #' @importFrom utils head
 #' 
 NULL

@@ -61,29 +61,35 @@ import(kernlab)
 import(lars)
 import(plsRglm)
 import(risksetROC)
-import(rms)
 import(survAUC)
 import(survcomp)
 import(survival)
 importFrom(grDevices,dev.new)
-importFrom(graphics,abline)
-importFrom(graphics,axis)
-importFrom(graphics,layout)
-importFrom(graphics,segments)
+importFrom(graphics,
+  abline,
+  axis,
+  layout,
+  segments
+)
 importFrom(mixOmics,nearZeroVar)
-importFrom(pls,plsr)
-importFrom(pls,scores)
-importFrom(stats,as.formula)
-importFrom(stats,complete.cases)
-importFrom(stats,contrasts)
-importFrom(stats,extractAIC)
-importFrom(stats,is.empty.model)
-importFrom(stats,median)
-importFrom(stats,model.matrix)
-importFrom(stats,model.response)
-importFrom(stats,model.weights)
-importFrom(stats,residuals)
-importFrom(stats,uniroot)
-importFrom(stats,var)
-importFrom(stats,weighted.mean)
+importFrom(pls,
+  plsr,
+  scores
+)
+importFrom(rms,cph)
+importFrom(stats,
+  as.formula,
+  complete.cases,
+  contrasts,
+  extractAIC,
+  is.empty.model,
+  median,
+  model.matrix,
+  model.response,
+  model.weights,
+  residuals,
+  uniroot,
+  var,
+  weighted.mean
+)
 importFrom(utils,head)
